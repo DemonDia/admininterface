@@ -10,6 +10,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { Button } from "@mui/material";
 
 function SkillPage(props) {
@@ -29,10 +30,10 @@ function SkillPage(props) {
         getSkills();
     }, []);
     return (
-        <div style = {{"margin":"10px"}}>
+        <div style={{ margin: "10px" }}>
             <h1>Skill Page</h1>
             <Button>
-                <Link to = {"/skills/add"}>Add Skill</Link>
+                <Link to={"/skills/add"}>Add Skill</Link>
             </Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -60,13 +61,15 @@ function SkillPage(props) {
                                 <TableCell component="th" scope="row">
                                     {skill.name}
                                 </TableCell>
-                                <TableCell align="right">
+                                <TableCell align="left">
                                     {skill.year_learnt}
                                 </TableCell>
-                                <TableCell>
+                                <TableCell align="center">
                                     <EditOutlinedIcon />
                                 </TableCell>
-                                <TableCell>Edit</TableCell>
+                                <TableCell align="center">
+                                    <DeleteForeverOutlinedIcon />
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
