@@ -39,9 +39,9 @@ function SkillPage(props) {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell align="right">Skill Name</TableCell>
-                            <TableCell align="right">
-                                Skill Learnt Year
+                            <TableCell align="center">Skill Name</TableCell>
+                            <TableCell align="center">
+                                Skill Year
                             </TableCell>
                             <TableCell align="center" colSpan={2}>
                                 Actions
