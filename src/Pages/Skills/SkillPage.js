@@ -40,9 +40,7 @@ function SkillPage(props) {
                     <TableHead>
                         <TableRow>
                             <TableCell align="center">Skill Name</TableCell>
-                            <TableCell align="center">
-                                Skill Year
-                            </TableCell>
+                            <TableCell align="center">Skill Year</TableCell>
                             <TableCell align="center" colSpan={2}>
                                 Actions
                             </TableCell>
@@ -65,7 +63,9 @@ function SkillPage(props) {
                                     {skill.year_learnt}
                                 </TableCell>
                                 <TableCell align="center">
-                                    <EditOutlinedIcon />
+                                    <Link to={`/skills/${skill._id}`}>
+                                        <EditOutlinedIcon />
+                                    </Link>
                                 </TableCell>
                                 <TableCell align="center">
                                     <DeleteForeverOutlinedIcon />
