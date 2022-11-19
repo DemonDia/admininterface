@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -11,6 +12,7 @@ import { Button } from "@mui/material";
 
 function SkillForm(props) {
     const baseURL = process.env.REACT_APP_BACKEND_API;
+    const navigate = useNavigate();
 
     const [success, setSuccess] = useState(false);
     const [haveError, setHaveError] = useState(false);
@@ -42,6 +44,8 @@ function SkillForm(props) {
                     setHaveError(false);
                     setErrorMessage("");
                     alert("Adding successful")
+                    navigate("/skills");
+                    
                 } else {
 
                     setSuccess(false);
@@ -63,7 +67,7 @@ function SkillForm(props) {
         <Card sx={{ width: "50%", margin: "auto" }}>
             <CardContent>
                 {!props.skill ? <h3>Add New Skill</h3> : <h3>Update Skill</h3>}
-                {skillName}
+                {/* {skillName} */}
                 <TextField
                     id="outlined-basic"
                     label="Skill Name"
@@ -72,7 +76,7 @@ function SkillForm(props) {
                     onChange = {(e)=>{setSkillName(e.target.value)}}
                     sx={{ width: "100%" }}
                 />
-                {skillYear}
+                {/* {skillYear} */}
                 <TextField
                     id="outlined-basic"
                     label="Skill Year"
