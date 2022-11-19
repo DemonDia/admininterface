@@ -25,15 +25,15 @@ function App() {
                 {/* ============================skills============================ */}
                 <Route exact path ="/skills" element = {<SkillPage/>}/>
                 <Route exact path ="/skills/add" element = {<AddSkills/>}/>
-                <Route exact path ="/skills/edit" element = {<EditSkill/>}/>
+                <Route exact path ="/skills/:skilId" element = {<EditSkill/>}/>
                 {/* ============================projects============================ */}
                 <Route exact path ="/projects" element = {<ProjectPage/>}/>
                 <Route exact path ="/projects/add" element = {<AddProjects/>}/>
-                <Route exact path ="/projects/edit" element = {<EditProject/>}/>
+                <Route exact path ="/projects/projectId" element = {<EditProject/>}/>
                 {/* ============================experiences============================ */}
                 <Route exact path ="/experiences" element = {<ExperiencePage/>}/>
                 <Route exact path ="/experiences/add" element = {<AddExperience/>}/>
-                <Route exact path ="/experiences/edit" element = {<EditExperience/>}/>
+                <Route exact path ="/experiences/experienceId" element = {<EditExperience/>}/>
                 {/* ============================etc============================ */}
                 <Route exact path="/" element={<MainMenu />} />
                 <Route exact path="*" element={<NotFound />} />
