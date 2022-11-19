@@ -25,8 +25,7 @@ function SkillPage(props) {
         });
     };
     useEffect(() => {
-        // console.log(env.BACKEND_API)
-        // baseURL = env.BACKEND_API;
+
         getSkills();
     }, []);
     return (

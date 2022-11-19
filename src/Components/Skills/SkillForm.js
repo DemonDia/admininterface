@@ -38,31 +38,60 @@ function SkillForm(props) {
                 year_learnt: skillYear,
             })
             .then((res) => {
-                console.log(res)
+                console.log(res);
                 if (res.data.success) {
                     setSuccess(true);
                     setHaveError(false);
                     setErrorMessage("");
-                    alert("Adding successful")
+                    alert("Adding successful");
                     navigate("/skills");
-                    
                 } else {
-
                     setSuccess(false);
                     setHaveError(true);
                     setErrorMessage(res.message);
-                    alert("Adding unsuccessful")
+                    alert("Adding unsuccessful");
                 }
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err);
                 setSuccess(false);
                 setHaveError(true);
                 setErrorMessage(err);
-                alert("Adding unsuccessful")
+                alert("Adding unsuccessful");
             });
     };
     // ============update============
+    const updateSkill = async () => {
+        await axios
+            .put(baseURL + "/skills", {
+                skill_Id: props.skill._id,
+                name: skillName,
+                year_learnt: skillYear,
+            })
+            .then((res) => {
+                console.log(res);
+                if (res.data.success) {
+                    setSuccess(true);
+                    setHaveError(false);
+                    setErrorMessage("");
+                    alert("Updating successful");
+                    navigate("/skills");
+                } else {
+                    setSuccess(false);
+                    setHaveError(true);
+                    setErrorMessage(res.message);
+                    alert("Updating unsuccessful");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                setSuccess(false);
+                setHaveError(true);
+                setErrorMessage(err);
+                alert("Updating unsuccessful");
+            });
+    };
+
     return (
         <Card sx={{ width: "50%", margin: "auto" }}>
             <CardContent>
@@ -72,8 +101,10 @@ function SkillForm(props) {
                     id="outlined-basic"
                     label="Skill Name"
                     variant="outlined"
-                    value = {skillName}
-                    onChange = {(e)=>{setSkillName(e.target.value)}}
+                    value={skillName}
+                    onChange={(e) => {
+                        setSkillName(e.target.value);
+                    }}
                     sx={{ width: "100%" }}
                 />
                 {/* {skillYear} */}
@@ -81,8 +112,10 @@ function SkillForm(props) {
                     id="outlined-basic"
                     label="Skill Year"
                     variant="outlined"
-                    value = {skillYear}
-                    onChange = {(e)=>{setSkillYear(e.target.value)}}
+                    value={skillYear}
+                    onChange={(e) => {
+                        setSkillYear(e.target.value);
+                    }}
                     sx={{ width: "100%" }}
                 />
                 {!props.skill ? (
@@ -94,7 +127,13 @@ function SkillForm(props) {
                         Add
                     </Button>
                 ) : (
-                    <Button>Save</Button>
+                    <Button
+                        onClick={() => {
+                            updateSkill();
+                        }}
+                    >
+                        Save
+                    </Button>
                 )}
             </CardContent>
         </Card>
