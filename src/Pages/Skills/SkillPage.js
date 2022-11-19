@@ -24,8 +24,26 @@ function SkillPage(props) {
             }
         });
     };
-    useEffect(() => {
 
+    const deleteSkill = async (skillId) => {
+        await axios
+            .delete(baseURL + `/skills/${skillId}`)
+            .then(async (res) => {
+                console.log(res);
+                if (res.data.success) {
+                    alert("Skill deleted!");
+                    await getSkills();
+                } else {
+                    alert("Failed to delete skill!");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Failed to delete skill");
+            });
+    };
+
+    useEffect(() => {
         getSkills();
     }, []);
     return (
@@ -66,11 +84,27 @@ function SkillPage(props) {
                                         <EditOutlinedIcon />
                                     </Link>
                                 </TableCell>
-                                <TableCell align="center">
-                                    <DeleteForeverOutlinedIcon />
+                                <TableCell
+                                    align="center"
+                                    onClick={() => {
+                                        deleteSkill(skill._id);
+                                    }}
+                                >
+                                    <Link>
+                                        <DeleteForeverOutlinedIcon />
+                                    </Link>
                                 </TableCell>
                             </TableRow>
                         ))}
+                        {skills.length == 0 ? (
+                            <TableRow>
+                                <TableCell align="center" colSpan={4}>
+                                    No skills to show
+                                </TableCell>
+                            </TableRow>
+                        ) : (
+                            <></>
+                        )}
                     </TableBody>
                 </Table>
             </TableContainer>
