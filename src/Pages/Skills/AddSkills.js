@@ -10,7 +10,7 @@ function AddSkills() {
             <Button>
                 <Link to = "/skills">Back</Link>
             </Button>
-            <SkillForm skillId = {null}></SkillForm>
+            <SkillForm skill = {null}></SkillForm>
         </div>
     );
 }
