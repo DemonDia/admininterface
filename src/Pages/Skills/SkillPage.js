@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import env from "react-dotenv";
 
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -14,7 +13,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Button } from "@mui/material";
 
 function SkillPage(props) {
-    const baseURL = env.BACKEND_API;
+    var baseURL = process.env.REACT_APP_BACKEND_API;
     const [skills, setSkills] = useState([]);
     const getSkills = async () => {
         await axios.get(baseURL + "/skills").then((res) => {
@@ -26,6 +25,7 @@ function SkillPage(props) {
     };
     useEffect(() => {
         // console.log(env.BACKEND_API)
+        // baseURL = env.BACKEND_API;
         getSkills();
     }, []);
     return (
@@ -38,7 +38,6 @@ function SkillPage(props) {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Dessert (100g serving)</TableCell>
                             <TableCell align="right">Skill Name</TableCell>
                             <TableCell align="right">
                                 Skill Learnt Year
