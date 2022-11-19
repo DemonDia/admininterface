@@ -10,7 +10,8 @@ function EditSkill() {
 
     const getSkill = async () => {
         await axios
-            .get(baseURL + "/skills/id", { body: { skill_Id: skilId } })
+            .get(baseURL + `/skills/${skilId}`, 
+            )
             .then((res) => {
                 console.log(res);
                 if (res.data.success) {
@@ -28,7 +29,8 @@ function EditSkill() {
             <Button>
                 <Link to="/skills">Back</Link>
             </Button>
-            <SkillForm skill={skill} />
+            {skill?<SkillForm skill={skill} />:<h3>Loading ...</h3>}
+            
         </div>
     );
 }

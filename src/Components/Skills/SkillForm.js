@@ -20,11 +20,11 @@ function SkillForm(props) {
     const [skillName, setSkillName] = useState("");
     const [skillYear, setSkillYear] = useState("");
 
-    useState(() => {
+    useEffect(() => {
         // ==========if its to update==========
         if (props.skill) {
             setSkillName(props.skill.name);
-            setSkillName(props.skill.year_learnt);
+            setSkillYear(props.skill.year_learnt);
         }
     }, []);
 
