@@ -50,6 +50,9 @@ function SkillPage(props) {
         <div style={{ margin: "10px" }}>
             <h1>Skill Page</h1>
             <Button>
+                <Link to={"/"}>Home</Link>
+            </Button>
+            <Button>
                 <Link to={"/skills/add"}>Add Skill</Link>
             </Button>
             <TableContainer component={Paper}>
