@@ -1,12 +1,12 @@
 import React from 'react';
 
-function AddSkills(props) {
+function MainMenu(props) {
     return (
         <div>
-            <h1>Add skills</h1>
+            <h1>Main menu</h1>
             
         </div>
     );
 }
 
-export default AddSkills;
+export default MainMenu;
