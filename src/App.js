@@ -33,7 +33,7 @@ function App() {
                 {/* ============================experiences============================ */}
                 <Route exact path ="/experience" element = {<ExperiencePage/>}/>
                 <Route exact path ="/experience/add" element = {<AddExperience/>}/>
-                <Route exact path ="/experience/experienceId" element = {<ViewExperience/>}/>
+                <Route exact path ="/experience/:experienceId" element = {<ViewExperience/>}/>
                 {/* ============================etc============================ */}
                 <Route exact path="/" element={<MainMenu />} />
                 <Route exact path="*" element={<NotFound />} />
