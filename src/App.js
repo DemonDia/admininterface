@@ -25,7 +25,7 @@ function App() {
                 {/* ============================skills============================ */}
                 <Route exact path ="/skills" element = {<SkillPage/>}/>
                 <Route exact path ="/skills/add" element = {<AddSkills/>}/>
-                <Route exact path ="/skills/:skilId" element = {<EditSkill/>}/>
+                <Route exact path ="/skills/:skillId" element = {<EditSkill/>}/>
                 {/* ============================projects============================ */}
                 <Route exact path ="/projects" element = {<ProjectPage/>}/>
                 <Route exact path ="/projects/add" element = {<AddProjects/>}/>

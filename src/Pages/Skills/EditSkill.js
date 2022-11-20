@@ -5,12 +5,12 @@ import SkillForm from "../../Components/Skills/SkillForm";
 import { Button } from "@mui/material";
 function EditSkill() {
     const baseURL = process.env.REACT_APP_BACKEND_API;
-    const { skilId } = useParams();
+    const { skillId } = useParams();
     const [skill, setSkill] = useState(null);
 
     const getSkill = async () => {
         await axios
-            .get(baseURL + `/skills/${skilId}`, 
+            .get(baseURL + `/skills/${skillId}`, 
             )
             .then((res) => {
                 console.log(res);
