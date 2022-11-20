@@ -13,10 +13,6 @@ import { Button } from "@mui/material";
 function SkillForm(props) {
     const baseURL = process.env.REACT_APP_BACKEND_API;
     const navigate = useNavigate();
-
-    const [success, setSuccess] = useState(false);
-    const [haveError, setHaveError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
     const [skillName, setSkillName] = useState("");
     const [skillYear, setSkillYear] = useState("");
 
@@ -40,23 +36,14 @@ function SkillForm(props) {
             .then((res) => {
                 console.log(res);
                 if (res.data.success) {
-                    setSuccess(true);
-                    setHaveError(false);
-                    setErrorMessage("");
                     alert("Adding successful");
                     navigate("/skills");
                 } else {
-                    setSuccess(false);
-                    setHaveError(true);
-                    setErrorMessage(res.message);
                     alert("Adding unsuccessful");
                 }
             })
             .catch((err) => {
                 console.log(err);
-                setSuccess(false);
-                setHaveError(true);
-                setErrorMessage(err);
                 alert("Adding unsuccessful");
             });
     };
@@ -71,23 +58,14 @@ function SkillForm(props) {
             .then((res) => {
                 console.log(res);
                 if (res.data.success) {
-                    setSuccess(true);
-                    setHaveError(false);
-                    setErrorMessage("");
                     alert("Updating successful");
                     navigate("/skills");
                 } else {
-                    setSuccess(false);
-                    setHaveError(true);
-                    setErrorMessage(res.message);
                     alert("Updating unsuccessful");
                 }
             })
             .catch((err) => {
                 console.log(err);
-                setSuccess(false);
-                setHaveError(true);
-                setErrorMessage(err);
                 alert("Updating unsuccessful");
             });
     };
