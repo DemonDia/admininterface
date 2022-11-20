@@ -23,8 +23,17 @@ function ExperienceForm(props) {
         // ==========if its to update==========
         if (props.experience) {
             setCompanyName(props.experience.companyName);
-            const { startingMonth, startingYear } =
+            console.log( props.experience.end.split(" "))
+            const [startingMonth, startingYear] =
                 props.experience.start.split(" ");
+            console.log();
+            setStartYear(startingYear);
+            setStartMonth(getMonthFromString(startingMonth));
+
+            const [endingMonth, endingYear] = props.experience.end.split(" ");
+            setEndYear(endingYear);
+            setEndMonth(getMonthFromString(endingMonth));
+
             setRoleName(props.experience.roleName);
             setDescription(props.experience.desc);
             // setStartDate(props.experience.start);
@@ -33,6 +42,9 @@ function ExperienceForm(props) {
     }, []);
 
     // ========================other functions========================
+    const  getMonthFromString = (mon) => {
+        return new Date(Date.parse(mon +" 1, 2012")).getMonth()+1
+     }
 
     const getMonthName = (monthNumber) => {
         const date = new Date();
@@ -49,7 +61,7 @@ function ExperienceForm(props) {
                 return word.charAt(0).toUpperCase() + word.slice(1);
             })
             .join(" ");
-    }
+    };
     // ============add============
     const addExperience = async () => {
         await axios
@@ -103,7 +115,7 @@ function ExperienceForm(props) {
     return (
         <Card sx={{ width: "50%", margin: "auto" }}>
             <CardContent>
-                {!props.skill ? (
+                {!props.experience ? (
                     <h3>Add New Experience</h3>
                 ) : (
                     <h3>Update Experience</h3>
@@ -195,7 +207,7 @@ function ExperienceForm(props) {
                     sx={{ width: "50%" }}
                 />
 
-                {!props.skill ? (
+                {!props.experience ? (
                     <Button
                         onClick={() => {
                             addExperience();
