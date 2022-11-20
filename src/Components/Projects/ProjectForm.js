@@ -124,10 +124,48 @@ function ProjectForm(props) {
                 alert("Adding unsuccessful");
             });
     };
+
+    // ===========update project============
+    const updateProject = async ()=>{
+        await axios
+        .put(baseURL + "/projects", {
+            project_Id: props.project._id,
+            name: toTitleCase(projectName),
+            year: projectYear,
+            desc: projectDesc,
+            imageLink: projectImgLink,
+            techStack:projectTechStacks,
+            links:projectLinks
+        })
+        .then((res) => {
+            console.log(res);
+            if (res.data.success) {
+                alert("Updating successful");
+                navigate("/projects");
+            } else {
+                alert("Updating unsuccessful");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            alert("Updating unsuccessful");
+        });
+    }
+
+    useEffect(()=>{
+        if(props.project){
+            setProjectName(props.project.name)
+            setProjectDesc(props.project.desc)
+            setProjectYear(props.project.year)
+            setProjectImgLink(props.project.imageLink)
+            setProjectTechStacks(props.project.techStack)
+            setProjectLinks(props.project.links)
+        }
+    },[])
     return (
         <Card sx={{ width: "60%", margin: "auto" }}>
             <CardContent>
-                {!props.experience ? (
+                {!props.project ? (
                     <h3>Add New Project</h3>
                 ) : (
                     <h3>Update Project</h3>
@@ -288,7 +326,6 @@ function ProjectForm(props) {
                                 </TableCell>
                             </TableRow>
                             {projectLinks.map((projectLink) => {
-                                console.log(projectLinks)
                                 return (
                                     <TableRow>
                                         <TableCell>
@@ -322,7 +359,7 @@ function ProjectForm(props) {
                     </Table>
                 </TableContainer>
 
-                {!props.projects ? (
+                {!props.project ? (
                     <Button
                         onClick={() => {
                             addProject();
@@ -333,7 +370,7 @@ function ProjectForm(props) {
                 ) : (
                     <Button
                         onClick={() => {
-                            // updateProject();
+                            updateProject();
                         }}
                     >
                         Save
