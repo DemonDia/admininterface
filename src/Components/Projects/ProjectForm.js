@@ -107,6 +107,8 @@ function ProjectForm(props) {
                 year: projectYear,
                 desc: projectDesc,
                 imageLink: projectImgLink,
+                techStack:projectTechStacks,
+                links:projectLinks
             })
             .then((res) => {
                 console.log(res);
