@@ -83,7 +83,7 @@ function ProjectPage() {
                                     {project.year}
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Link to={`/skills/${project._id}`}>
+                                    <Link to={`/projects/${project._id}`}>
                                         <EditOutlinedIcon />
                                     </Link>
                                 </TableCell>

@@ -29,7 +29,7 @@ function App() {
                 {/* ============================projects============================ */}
                 <Route exact path ="/projects" element = {<ProjectPage/>}/>
                 <Route exact path ="/projects/add" element = {<AddProjects/>}/>
-                <Route exact path ="/projects/projectId" element = {<EditProject/>}/>
+                <Route exact path ="/projects/:projectId" element = {<EditProject/>}/>
                 {/* ============================experiences============================ */}
                 <Route exact path ="/experience" element = {<ExperiencePage/>}/>
                 <Route exact path ="/experience/add" element = {<AddExperience/>}/>

@@ -29,6 +29,9 @@ function ProjectForm(props) {
 
     const [techStackName, setTechStackName] = useState("");
 
+    const [projectLinkURL, setProjectLinkURL] = useState("");
+    const [projectLinkName, setProjectLinkName] = useState("");
+
     // ========================other functions========================
     const toTitleCase = (str) => {
         return str
@@ -40,15 +43,49 @@ function ProjectForm(props) {
             .join(" ");
     };
 
+    // ===========add link ===========
+    const addProjectLink = () => {
+        const titleCaseProjectLinkName = toTitleCase(projectLinkName);
+        const findDuplicates = projectLinks.filter((projectLink) => {
+            return projectLink.name == titleCaseProjectLinkName;
+        });
+        console.log(findDuplicates)
+        if (findDuplicates.length > 0) {
+            alert("Duplicate found");
+        } else if (titleCaseProjectLinkName == "") {
+            alert("Link name cannot be empty");
+        } else {
+            projectLinks.push({
+                name: titleCaseProjectLinkName,
+                url: projectLinkURL,
+            });
+            setProjectLinks(projectLinks);
+            setProjectLinkURL("");
+            setProjectLinkName("");
+        }
+    };
+
+    // ===========delete link ===========
+    const deleteProjectLink = (currProjectLink) => {
+        const newProjectLinks = projectLinks.filter((projectLink) => {
+            return (!(
+                projectLink.name == currProjectLink.name &&
+                projectLink.url == currProjectLink.url
+            ));
+        });
+        setProjectLinks(newProjectLinks);
+    };
+
     // ============add tech stack============
     const addTechStack = () => {
-        setTechStackName(toTitleCase(techStackName));
-        if (projectTechStacks.includes(techStackName)) {
+        const titleCaseTechStack = toTitleCase(techStackName);
+
+        if (projectTechStacks.includes(titleCaseTechStack)) {
             alert("It exists");
-        } else if (techStackName == "") {
+        } else if (titleCaseTechStack == "") {
             alert("Tech Stack cannot be empty");
         } else {
-            projectTechStacks.push(techStackName);
+            projectTechStacks.push(titleCaseTechStack);
             setProjectTechStacks(projectTechStacks);
             setTechStackName("");
         }
@@ -141,7 +178,7 @@ function ProjectForm(props) {
                     }}
                     sx={{ width: "100%" }}
                 />
-                <label>Tech Stack</label>
+                <label>Project Links</label>
                 <TableContainer component={Paper}>
                     <Table sx={{ width: "100%" }}>
                         <TableHead>
@@ -184,9 +221,95 @@ function ProjectForm(props) {
                                     <TableRow>
                                         <TableCell>{techStack}</TableCell>
                                         <TableCell align={"center"}>
-                                            <Link onClick = {()=>{
-                                                deleteTechStack(techStack)
-                                            }}>
+                                            <Link
+                                                onClick={() => {
+                                                    deleteTechStack(techStack);
+                                                }}
+                                            >
+                                                <DeleteForeverOutlinedIcon />
+                                            </Link>
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
+                <TableContainer component={Paper}>
+                    <Table sx={{ width: "100%" }}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center">Link Name</TableCell>
+                                <TableCell align="center">URL</TableCell>
+                                <TableCell align="center" colSpan={2}>
+                                    Actions
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell>
+                                    <TextField
+                                        label="Link Name"
+                                        sx={{ width: "100%" }}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        value={projectLinkName}
+                                        onChange={(e) => {
+                                            setProjectLinkName(e.target.value);
+                                        }}
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <TextField
+                                        label="URL Name"
+                                        sx={{ width: "100%" }}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        value={projectLinkURL}
+                                        onChange={(e) => {
+                                            setProjectLinkURL(e.target.value);
+                                        }}
+                                    />
+                                </TableCell>
+                                <TableCell colSpan={2} align={"center"}>
+                                    <Button
+                                        onClick={() => {
+                                            addProjectLink();
+                                        }}
+                                    >
+                                        Add
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                            {projectLinks.map((projectLink) => {
+                                console.log(projectLinks)
+                                return (
+                                    <TableRow>
+                                        <TableCell>
+                                            {projectLink.name}
+                                        </TableCell>
+                                        <TableCell>
+                                            <a
+                                                target="_blank"
+                                                href={
+                                                    "https://" + projectLink.url
+                                                }
+                                            >
+                                                {projectLink.url}
+                                            </a>
+                                        </TableCell>
+                                        <TableCell align={"center"}>
+                                            <Link
+                                                onClick={() => {
+                                                    deleteProjectLink(
+                                                        projectLink
+                                                    );
+                                                }}
+                                            >
                                                 <DeleteForeverOutlinedIcon />
                                             </Link>
                                         </TableCell>
