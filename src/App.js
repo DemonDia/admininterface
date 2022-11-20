@@ -12,7 +12,7 @@ import EditProject from "./Pages/Projects/EditProject";
 // ============================experiences============================
 import ExperiencePage from "./Pages/Experiences/ExperiencePage"
 import AddExperience from "./Pages/Experiences/AddExperience"
-import EditExperience from "./Pages/Experiences/EditExperience";
+import ViewExperience from "./Pages/Experiences/ViewExperience";
 // ============================etc============================
 import MainMenu from "./Pages/MainMenu";
 import NotFound from "./Pages/NotFound"
@@ -31,9 +31,9 @@ function App() {
                 <Route exact path ="/projects/add" element = {<AddProjects/>}/>
                 <Route exact path ="/projects/projectId" element = {<EditProject/>}/>
                 {/* ============================experiences============================ */}
-                <Route exact path ="/experiences" element = {<ExperiencePage/>}/>
-                <Route exact path ="/experiences/add" element = {<AddExperience/>}/>
-                <Route exact path ="/experiences/experienceId" element = {<EditExperience/>}/>
+                <Route exact path ="/experience" element = {<ExperiencePage/>}/>
+                <Route exact path ="/experience/add" element = {<AddExperience/>}/>
+                <Route exact path ="/experience/experienceId" element = {<ViewExperience/>}/>
                 {/* ============================etc============================ */}
                 <Route exact path="/" element={<MainMenu />} />
                 <Route exact path="*" element={<NotFound />} />

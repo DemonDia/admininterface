@@ -13,7 +13,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { Button } from "@mui/material";
 
-function SkillPage(props) {
+function SkillPage() {
     var baseURL = process.env.REACT_APP_BACKEND_API;
     const [skills, setSkills] = useState([]);
     const getSkills = async () => {

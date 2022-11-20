@@ -1,6 +1,6 @@
 import React from 'react';
 
-function EditExperience(props) {
+function ViewExperience(props) {
     return (
         <div>
             <h1>Edit Experience</h1>
@@ -9,4 +9,4 @@ function EditExperience(props) {
     );
 }
 
-export default EditExperience;
+export default ViewExperience;
