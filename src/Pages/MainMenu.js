@@ -47,7 +47,7 @@ function MainMenu(props) {
             //     alert("Import failed")
             // })
 
-            // axios.post(process.env .REACT_APP_BACKEND_API+"/projects/skills",skills).then(
+            // axios.post(process.env .REACT_APP_BACKEND_API+"/projects/import",skills).then(
             //     (res) =>{
 
             //     }
