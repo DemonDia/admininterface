@@ -92,7 +92,6 @@ function ExperiencePage() {
                             <TableCell align="center">Company Name</TableCell>
                             <TableCell align="center">Start Date</TableCell>
                             <TableCell align="center">End Date</TableCell>
-                            <TableCell align="center">Description</TableCell>
                             <TableCell align="center">Role Name</TableCell>
                             <TableCell align="center" colSpan={2}>
                                 Actions
@@ -117,9 +116,6 @@ function ExperiencePage() {
                                 </TableCell>
                                 <TableCell align="left">
                                     {experience.end}
-                                </TableCell>
-                                <TableCell align="left">
-                                    {experience.desc}
                                 </TableCell>
                                 <TableCell align="left">
                                     {experience.roleName}
