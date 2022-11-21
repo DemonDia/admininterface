@@ -9,14 +9,51 @@ function MainMenu(props) {
         const fileReader = new FileReader();
         fileReader.readAsText(e.target.files[0], "UTF-8");
         fileReader.onload = (e) => {
-            const jsonChunk = JSON.parse(e.target.result)
-            const experiences = jsonChunk.experience
-            const projects = jsonChunk.project
-            const skills = jsonChunk.skill
+            const jsonChunk = JSON.parse(e.target.result);
+            const experiences = jsonChunk.experience;
+            const projects = jsonChunk.project;
+            const skillsChunk = jsonChunk.skill;
 
-            console.log(experiences)
-            console.log(projects)
-            console.log(skills)
+            console.log(experiences);
+            console.log(projects);
+            console.log(skillsChunk);
+
+            var skills = [];
+
+            // clean the skills
+            for (var year in skillsChunk) {
+                for (var skill in skillsChunk[year]) {
+                    var newSkill = {
+                        name: skillsChunk[year][skill].name,
+                        year_learnt: year,
+                    };
+                    skills.push(newSkill);
+                }
+            }
+            console.log("skills", skills);
+
+            // axios.post(process.env .REACT_APP_BACKEND_API+"/experiences/import",experiences).then(
+            //     (res) =>{
+
+            //     }
+            // ).then(err=>{
+            //     alert("Import failed")
+            // })
+            // axios.post(process.env .REACT_APP_BACKEND_API+"/projects/import",projects).then(
+            //     (res) =>{
+
+            //     }
+            // ).then(err=>{
+            //     alert("Import failed")
+            // })
+
+            // axios.post(process.env .REACT_APP_BACKEND_API+"/projects/skills",skills).then(
+            //     (res) =>{
+
+            //     }
+            // ).then(err=>{
+            //     alert("Import failed")
+            // })
             // upload the experiences, project into json
         };
     };
