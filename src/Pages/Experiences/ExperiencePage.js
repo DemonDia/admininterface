@@ -109,16 +109,16 @@ function ExperiencePage() {
                                 }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {experience.companyName}
+                                    {experience.company_name}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {experience.start}
+                                    {experience.starting}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {experience.end}
+                                    {experience.starting}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {experience.roleName}
+                                    {experience.title}
                                 </TableCell>
                                 <TableCell align="center">
                                     <Link to={`/experience/${experience._id}`}>
