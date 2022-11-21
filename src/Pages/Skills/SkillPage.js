@@ -43,6 +43,27 @@ function SkillPage() {
             });
     };
 
+    const deleteAllSkills = async () => {
+        console.log("clicked");
+        var deleteKey = prompt("Are you sure you want to delete?(Type 'yes' to delete all)")
+        if(deleteKey =='yes'){
+            await axios
+            .delete(baseURL + "/skills/")
+            .then(async (res) => {
+                if (res.data.success) {
+                    alert("Reset successfully");
+                    await getSkills();
+                }
+                else{
+                    alert("Failed to reset")
+                }
+            })
+            .catch((err) => {
+                alert("Skills reset unsuccessfully");
+            });
+        }
+    };
+
     useEffect(() => {
         getSkills();
     }, []);
@@ -54,6 +75,15 @@ function SkillPage() {
             </Button>
             <Button>
                 <Link to={"/skills/add"}>Add Skill</Link>
+            </Button>
+            <Button>
+                <Link
+                    onClick={() => {
+                        deleteAllSkills();
+                    }}
+                >
+                    Empty skill records
+                </Link>
             </Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">

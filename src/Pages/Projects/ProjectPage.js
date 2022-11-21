@@ -25,6 +25,26 @@ function ProjectPage() {
         });
     };
 
+    const deleteAllProjects = async () => {
+        var deleteKey = prompt("Are you sure you want to delete?(Type 'yes' to delete all)")
+        if(deleteKey =='yes'){
+            await axios
+            .delete(baseURL + "/projects/")
+            .then(async (res) => {
+                if (res.data.success) {
+                    alert("Reset successfully");
+                    await getProjects();
+                }
+                else{
+                    alert("Failed to reset")
+                }
+            })
+            .catch((err) => {
+                alert("Projects reset unsuccessfully");
+            });
+        }
+    };
+
     const deleteProject = async (projectId) => {
         await axios
             .delete(baseURL + `/projects/${projectId}`)
@@ -54,6 +74,15 @@ function ProjectPage() {
             </Button>
             <Button>
                 <Link to={"/projects/add"}>Add Project</Link>
+            </Button>
+            <Button>
+                <Link
+                    onClick={() => {
+                        deleteAllProjects();
+                    }}
+                >
+                    Empty project records
+                </Link>
             </Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">

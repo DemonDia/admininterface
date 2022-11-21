@@ -42,6 +42,27 @@ function ExperiencePage() {
             });
     };
 
+    const deleteAllExperiences = async () => {
+        var deleteKey = prompt(
+            "Are you sure you want to delete?(Type 'yes' to delete all)"
+        );
+        if (deleteKey == "yes") {
+            await axios
+                .delete(baseURL + "/experiences/")
+                .then(async (res) => {
+                    if (res.data.success) {
+                        alert("Reset successfully");
+                        await getExperience();
+                    } else {
+                        alert("Failed to reset");
+                    }
+                })
+                .catch((err) => {
+                    alert("Experiences reset unsuccessfully");
+                });
+        }
+    };
+
     useEffect(() => {
         getExperience();
     }, []);
@@ -53,6 +74,16 @@ function ExperiencePage() {
             </Button>
             <Button>
                 <Link to={"/experience/add"}>Add Experience</Link>
+            </Button>
+
+            <Button>
+                <Link
+                    onClick={() => {
+                        deleteAllExperiences();
+                    }}
+                >
+                    Empty experience records
+                </Link>
             </Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
