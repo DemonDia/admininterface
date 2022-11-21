@@ -53,20 +53,21 @@ function ExperienceForm(props) {
         // ==========if its to update==========
         if (props.experience) {
             setCompanyName(props.experience.company_name);
-            console.log(props.experience.starting)
+            console.log(props.experience.starting);
             const [startingMonth, startingYear] =
                 props.experience.starting.split(" ");
             console.log();
             setStartYear(startingYear);
             setStartMonth(getMonthFromString(startingMonth));
 
-            const [endingMonth, endingYear] = props.experience.ending.split(" ");
+            const [endingMonth, endingYear] =
+                props.experience.ending.split(" ");
             setEndYear(endingYear);
             setEndMonth(getMonthFromString(endingMonth));
 
             setRoleName(props.experience.title);
             setDetails(props.experience.details);
-            setCompanyURL(props.experience.website)
+            setCompanyURL(props.experience.website);
         }
     }, []);
 
@@ -100,8 +101,8 @@ function ExperienceForm(props) {
                 ending: getMonthName(endMonth) + " " + endYear,
                 details: details,
                 title: toTitleCase(roleName),
-                website:companyURL,
-                status:status
+                website: companyURL,
+                status: status,
             })
             .then((res) => {
                 console.log(res);
@@ -127,8 +128,8 @@ function ExperienceForm(props) {
                 ending: getMonthName(endMonth) + " " + endYear,
                 details: details,
                 title: toTitleCase(roleName),
-                website:companyURL,
-                status:status
+                website: companyURL,
+                status: status,
             })
             .then((res) => {
                 console.log(res);
@@ -195,10 +196,14 @@ function ExperienceForm(props) {
                     sx={{ width: "100%" }}
                 />
 
-                <label>Details</label>
                 <TableContainer component={Paper}>
                     <Table sx={{ width: "100%" }}>
                         <TableHead>
+                            <TableRow>
+                                <TableCell align="center" colSpan={3}>
+                                    <h3>Details</h3>
+                                </TableCell>
+                            </TableRow>
                             <TableRow>
                                 <TableCell align="center">Info</TableCell>
                                 <TableCell align="center" colSpan={2}>
@@ -260,8 +265,7 @@ function ExperienceForm(props) {
                         setCompanyURL(e.target.value);
                     }}
                     sx={{ width: "100%" }}
-                >
-                </TextField>
+                ></TextField>
 
                 <TextField
                     value={status}

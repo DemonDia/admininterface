@@ -48,7 +48,7 @@ function ProjectForm(props) {
         const findDuplicates = projectLinks.filter((projectLink) => {
             return projectLink.name == titleCaseProjectLinkName;
         });
-        console.log(findDuplicates)
+        console.log(findDuplicates);
         if (findDuplicates.length > 0) {
             alert("Duplicate found");
         } else if (titleCaseProjectLinkName == "") {
@@ -67,10 +67,10 @@ function ProjectForm(props) {
     // ===========delete link ===========
     const deleteProjectLink = (currProjectLink) => {
         const newProjectLinks = projectLinks.filter((projectLink) => {
-            return (!(
+            return !(
                 projectLink.name == currProjectLink.name &&
                 projectLink.url == currProjectLink.url
-            ));
+            );
         });
         setProjectLinks(newProjectLinks);
     };
@@ -106,8 +106,8 @@ function ProjectForm(props) {
                 year: projectYear,
                 desc: projectDesc,
                 image: projectImgLink,
-                tech_stack:projectTechStacks,
-                links:projectLinks
+                tech_stack: projectTechStacks,
+                links: projectLinks,
             })
             .then((res) => {
                 console.log(res);
@@ -125,42 +125,42 @@ function ProjectForm(props) {
     };
 
     // ===========update project============
-    const updateProject = async ()=>{
+    const updateProject = async () => {
         await axios
-        .put(baseURL + "/projects", {
-            project_Id: props.project._id,
-            name: toTitleCase(projectName),
-            year: projectYear,
-            desc: projectDesc,
-            image: projectImgLink,
-            tech_stack:projectTechStacks,
-            links:projectLinks
-        })
-        .then((res) => {
-            console.log(res);
-            if (res.data.success) {
-                alert("Updating successful");
-                navigate("/projects");
-            } else {
+            .put(baseURL + "/projects", {
+                project_Id: props.project._id,
+                name: toTitleCase(projectName),
+                year: projectYear,
+                desc: projectDesc,
+                image: projectImgLink,
+                tech_stack: projectTechStacks,
+                links: projectLinks,
+            })
+            .then((res) => {
+                console.log(res);
+                if (res.data.success) {
+                    alert("Updating successful");
+                    navigate("/projects");
+                } else {
+                    alert("Updating unsuccessful");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
                 alert("Updating unsuccessful");
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-            alert("Updating unsuccessful");
-        });
-    }
+            });
+    };
 
-    useEffect(()=>{
-        if(props.project){
-            setProjectName(props.project.name)
-            setProjectDesc(props.project.desc)
-            setProjectYear(props.project.year)
-            setProjectImgLink(props.project.image)
-            setProjectTechStacks(props.project.tech_stack)
-            setProjectLinks(props.project.links)
+    useEffect(() => {
+        if (props.project) {
+            setProjectName(props.project.name);
+            setProjectDesc(props.project.desc);
+            setProjectYear(props.project.year);
+            setProjectImgLink(props.project.image);
+            setProjectTechStacks(props.project.tech_stack);
+            setProjectLinks(props.project.links);
         }
-    },[])
+    }, []);
     return (
         <Card sx={{ width: "60%", margin: "auto" }}>
             <CardContent>
@@ -217,10 +217,14 @@ function ProjectForm(props) {
                     }}
                     sx={{ width: "100%" }}
                 />
-                <label>Project Links</label>
                 <TableContainer component={Paper}>
                     <Table sx={{ width: "100%" }}>
                         <TableHead>
+                            <TableRow>
+                                <TableCell align="center" colSpan={3}>
+                                    <h3>Tech Stacks</h3>
+                                </TableCell>
+                            </TableRow>
                             <TableRow>
                                 <TableCell align="center">
                                     Tech Stack Name
@@ -278,6 +282,11 @@ function ProjectForm(props) {
                 <TableContainer component={Paper}>
                     <Table sx={{ width: "100%" }}>
                         <TableHead>
+                            <TableRow>
+                                <TableCell align="center" colSpan={4}>
+                                    <h3>Project Links</h3>
+                                </TableCell>
+                            </TableRow>
                             <TableRow>
                                 <TableCell align="center">Link Name</TableCell>
                                 <TableCell align="center">URL</TableCell>
