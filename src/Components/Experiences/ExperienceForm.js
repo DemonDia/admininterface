@@ -52,22 +52,21 @@ function ExperienceForm(props) {
     useEffect(() => {
         // ==========if its to update==========
         if (props.experience) {
-            setCompanyName(props.experience.companyName);
-            console.log(props.experience.end.split(" "));
+            setCompanyName(props.experience.company_name);
+            console.log(props.experience.starting)
             const [startingMonth, startingYear] =
-                props.experience.start.split(" ");
+                props.experience.starting.split(" ");
             console.log();
             setStartYear(startingYear);
             setStartMonth(getMonthFromString(startingMonth));
 
-            const [endingMonth, endingYear] = props.experience.end.split(" ");
+            const [endingMonth, endingYear] = props.experience.ending.split(" ");
             setEndYear(endingYear);
             setEndMonth(getMonthFromString(endingMonth));
 
-            setRoleName(props.experience.roleName);
-            setDetails(props.experience.desc);
-            // setStartDate(props.experience.start);
-            // setEndDate(props.experience.end);
+            setRoleName(props.experience.title);
+            setDetails(props.experience.details);
+            setCompanyURL(props.experience.website)
         }
     }, []);
 
