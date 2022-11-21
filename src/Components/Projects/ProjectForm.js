@@ -343,7 +343,7 @@ function ProjectForm(props) {
                                             <a
                                                 target="_blank"
                                                 href={
-                                                    "https://" + projectLink.url
+                                                    projectLink.url
                                                 }
                                             >
                                                 {projectLink.url}
