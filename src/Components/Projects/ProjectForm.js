@@ -93,8 +93,8 @@ function ProjectForm(props) {
     };
     // ============delete tech stack============
     const deleteTechStack = (currentTechStack) => {
-        const techStacks = projectTechStacks.filter((techStack) => {
-            return techStack != currentTechStack;
+        const techStacks = projectTechStacks.filter((tech_stack) => {
+            return tech_stack != currentTechStack;
         });
         setProjectTechStacks(techStacks);
     };
@@ -106,8 +106,8 @@ function ProjectForm(props) {
                 name: toTitleCase(projectName),
                 year: projectYear,
                 desc: projectDesc,
-                imageLink: projectImgLink,
-                techStack:projectTechStacks,
+                image: projectImgLink,
+                tech_stack:projectTechStacks,
                 links:projectLinks
             })
             .then((res) => {
@@ -133,8 +133,8 @@ function ProjectForm(props) {
             name: toTitleCase(projectName),
             year: projectYear,
             desc: projectDesc,
-            imageLink: projectImgLink,
-            techStack:projectTechStacks,
+            image: projectImgLink,
+            tech_stack:projectTechStacks,
             links:projectLinks
         })
         .then((res) => {
@@ -157,8 +157,8 @@ function ProjectForm(props) {
             setProjectName(props.project.name)
             setProjectDesc(props.project.desc)
             setProjectYear(props.project.year)
-            setProjectImgLink(props.project.imageLink)
-            setProjectTechStacks(props.project.techStack)
+            setProjectImgLink(props.project.image)
+            setProjectTechStacks(props.project.tech_stack)
             setProjectLinks(props.project.links)
         }
     },[])
@@ -256,14 +256,14 @@ function ProjectForm(props) {
                                     </Button>
                                 </TableCell>
                             </TableRow>
-                            {projectTechStacks.map((techStack) => {
+                            {projectTechStacks.map((tech_stack) => {
                                 return (
                                     <TableRow>
-                                        <TableCell>{techStack}</TableCell>
+                                        <TableCell>{tech_stack}</TableCell>
                                         <TableCell align={"center"}>
                                             <Link
                                                 onClick={() => {
-                                                    deleteTechStack(techStack);
+                                                    deleteTechStack(tech_stack);
                                                 }}
                                             >
                                                 <DeleteForeverOutlinedIcon />
