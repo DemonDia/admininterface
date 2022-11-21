@@ -5,6 +5,16 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { Link } from "react-router-dom";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 function ExperienceForm(props) {
     const baseURL = process.env.REACT_APP_BACKEND_API;
@@ -12,18 +22,38 @@ function ExperienceForm(props) {
 
     const [companyName, setCompanyName] = useState("");
     const [roleName, setRoleName] = useState("");
-    const [description, setDescription] = useState("");
+    const [details, setDetails] = useState([]);
+    const [detailPoint, setDetailPoint] = useState("");
 
     const [startMonth, setStartMonth] = useState(11);
     const [startYear, setStartYear] = useState(2022);
+    const [status, setStatus] = useState("Active");
+    const [companyURL, setCompanyURL] = useState("");
     const [endMonth, setEndMonth] = useState(11);
     const [endYear, setEndYear] = useState(2022);
+
+    const monthsDict = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+    ];
+
+    const statusList = ["Active", "Completed"];
 
     useEffect(() => {
         // ==========if its to update==========
         if (props.experience) {
             setCompanyName(props.experience.companyName);
-            console.log( props.experience.end.split(" "))
+            console.log(props.experience.end.split(" "));
             const [startingMonth, startingYear] =
                 props.experience.start.split(" ");
             console.log();
@@ -35,16 +65,16 @@ function ExperienceForm(props) {
             setEndMonth(getMonthFromString(endingMonth));
 
             setRoleName(props.experience.roleName);
-            setDescription(props.experience.desc);
+            setDetails(props.experience.desc);
             // setStartDate(props.experience.start);
             // setEndDate(props.experience.end);
         }
     }, []);
 
     // ========================other functions========================
-    const  getMonthFromString = (mon) => {
-        return new Date(Date.parse(mon +" 1, 2012")).getMonth()+1
-     }
+    const getMonthFromString = (mon) => {
+        return new Date(Date.parse(mon + " 1, 2012")).getMonth() + 1;
+    };
 
     const getMonthName = (monthNumber) => {
         const date = new Date();
@@ -66,11 +96,13 @@ function ExperienceForm(props) {
     const addExperience = async () => {
         await axios
             .post(baseURL + "/experiences", {
-                companyName: toTitleCase(companyName),
-                roleName: toTitleCase(roleName),
-                desc: description,
-                start: getMonthName(startMonth) + " " + startYear,
-                end: getMonthName(endMonth) + " " + endYear,
+                company_name: toTitleCase(companyName),
+                starting: getMonthName(startMonth) + " " + startYear,
+                ending: getMonthName(endMonth) + " " + endYear,
+                details: details,
+                title: toTitleCase(roleName),
+                website:companyURL,
+                status:status
             })
             .then((res) => {
                 console.log(res);
@@ -91,11 +123,13 @@ function ExperienceForm(props) {
         await axios
             .put(baseURL + "/experiences", {
                 experience_Id: props.experience._id,
-                companyName: toTitleCase(companyName),
-                roleName: toTitleCase(roleName),
-                desc: description,
-                start: getMonthName(startMonth) + " " + startYear,
-                end: getMonthName(endMonth) + " " + endYear,
+                company_name: toTitleCase(companyName),
+                starting: getMonthName(startMonth) + " " + startYear,
+                ending: getMonthName(endMonth) + " " + endYear,
+                details: details,
+                title: toTitleCase(roleName),
+                website:companyURL,
+                status:status
             })
             .then((res) => {
                 console.log(res);
@@ -112,8 +146,28 @@ function ExperienceForm(props) {
             });
     };
 
+    // ============add detail============
+    const addDetailPoint = () => {
+        if (details.includes(detailPoint)) {
+            alert("It exists");
+        } else if (detailPoint == "") {
+            alert("Detail cannot be empty");
+        } else {
+            details.push(detailPoint);
+            setDetails(details);
+            setDetailPoint("");
+        }
+    };
+    // ============delete detail============
+    const deleteDetailPoint = (currentDetail) => {
+        const filteredDetails = details.filter((detail) => {
+            return detail != currentDetail;
+        });
+        setDetails(filteredDetails);
+    };
+
     return (
-        <Card sx={{ width: "50%", margin: "auto" }}>
+        <Card sx={{ width: "60%", margin: "auto" }}>
             <CardContent>
                 {!props.experience ? (
                     <h3>Add New Experience</h3>
@@ -141,18 +195,91 @@ function ExperienceForm(props) {
                     }}
                     sx={{ width: "100%" }}
                 />
+
+                <label>Details</label>
+                <TableContainer component={Paper}>
+                    <Table sx={{ width: "100%" }}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center">Info</TableCell>
+                                <TableCell align="center" colSpan={2}>
+                                    Actions
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell>
+                                    <TextField
+                                        label="Detail"
+                                        sx={{ width: "100%" }}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        value={detailPoint}
+                                        onChange={(e) => {
+                                            setDetailPoint(e.target.value);
+                                        }}
+                                    />
+                                </TableCell>
+                                <TableCell colSpan={2} align={"center"}>
+                                    <Button
+                                        onClick={() => {
+                                            addDetailPoint();
+                                        }}
+                                    >
+                                        Add
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                            {details.map((detail) => {
+                                return (
+                                    <TableRow>
+                                        <TableCell>{detail}</TableCell>
+                                        <TableCell align={"center"}>
+                                            <Link
+                                                onClick={() => {
+                                                    deleteDetailPoint(detail);
+                                                }}
+                                            >
+                                                <DeleteForeverOutlinedIcon />
+                                            </Link>
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
                 <TextField
-                    id="outlined-basic"
-                    label="Description"
-                    variant="outlined"
-                    multiline
-                    minRows={2}
-                    value={description}
+                    value={companyURL}
+                    label="Company site"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                     onChange={(e) => {
-                        setDescription(e.target.value);
+                        setCompanyURL(e.target.value);
                     }}
                     sx={{ width: "100%" }}
-                />
+                >
+                </TextField>
+
+                <TextField
+                    value={status}
+                    label="Role status"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    onChange={(e) => {
+                        setStatus(e.target.value);
+                    }}
+                    sx={{ width: "100%" }}
+                    select
+                >
+                    {statusList.map((status) => {
+                        return <MenuItem value={status}>{status}</MenuItem>;
+                    })}
+                </TextField>
                 <TextField
                     type="number"
                     label="Start Year"
@@ -166,19 +293,22 @@ function ExperienceForm(props) {
                         setStartYear(e.target.value);
                     }}
                 />
-
                 <TextField
-                    id="outlined-basic"
-                    type="number"
-                    label="Start Month"
-                    variant="outlined"
                     value={startMonth}
-                    inputProps={{ min: 1, max: 12, maxLength: 2 }}
+                    label="Start Month"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                     onChange={(e) => {
                         setStartMonth(e.target.value);
                     }}
                     sx={{ width: "50%" }}
-                />
+                    select
+                >
+                    {monthsDict.map((month, number) => {
+                        return <MenuItem value={number + 1}>{month}</MenuItem>;
+                    })}
+                </TextField>
 
                 <TextField
                     type="number"
@@ -195,17 +325,21 @@ function ExperienceForm(props) {
                 />
 
                 <TextField
-                    id="outlined-basic"
-                    type="number"
-                    label="End Month"
-                    variant="outlined"
                     value={endMonth}
-                    inputProps={{ min: 1, max: 12, maxLength: 2 }}
+                    label="Start Month"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                     onChange={(e) => {
                         setEndMonth(e.target.value);
                     }}
                     sx={{ width: "50%" }}
-                />
+                    select
+                >
+                    {monthsDict.map((month, number) => {
+                        return <MenuItem value={number + 1}>{month}</MenuItem>;
+                    })}
+                </TextField>
 
                 {!props.experience ? (
                     <Button
