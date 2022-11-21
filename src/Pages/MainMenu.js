@@ -30,30 +30,26 @@ function MainMenu(props) {
                     skills.push(newSkill);
                 }
             }
-            console.log("skills", skills);
 
-            // axios.post(process.env .REACT_APP_BACKEND_API+"/experiences/import",experiences).then(
-            //     (res) =>{
-
-            //     }
-            // ).then(err=>{
-            //     alert("Import failed")
-            // })
-            // axios.post(process.env .REACT_APP_BACKEND_API+"/projects/import",projects).then(
-            //     (res) =>{
-
-            //     }
-            // ).then(err=>{
-            //     alert("Import failed")
-            // })
-
-            // axios.post(process.env .REACT_APP_BACKEND_API+"/projects/import",skills).then(
-            //     (res) =>{
-
-            //     }
-            // ).then(err=>{
-            //     alert("Import failed")
-            // })
+            axios
+                .post(process.env.REACT_APP_BACKEND_API + "/import", {
+                    skills: skills,
+                    experiences: experiences,
+                    projects: projects,
+                })
+                .then((res) => {
+                    if (res.data.success) {
+                        console.log(res);
+                        console.log("Skills imported successfully");
+                        alert("Imported");
+                    } else {
+                        alert("Import failed");
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    alert("Import failed");
+                });
             // upload the experiences, project into json
         };
     };
@@ -79,15 +75,14 @@ function MainMenu(props) {
                     <Button variant="text">
                         <Link to="/experience">Manage Experiences</Link>
                     </Button>
-                    <Button variant="text" component="label">
+
+                    <Button variant="filled" component="label">
                         <input
+                            hidden="true"
                             type="file"
                             accept="json"
                             onChange={(e) => viewUploadedFile(e)}
                         />
-                    </Button>
-
-                    <Button variant="filled" component="label">
                         Import
                     </Button>
                     {/* <Button variant="text">Manage Contacts</Button> */}
