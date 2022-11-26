@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Card, TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import {loginPageAuthCheck} from "../Authenticated"
 function Login(props) {
+    const navigate = useNavigate();
     const [password, setPassword] = useState("");
     const login = () =>{
-        if(password == process.env.REACT_APP_ADMIN_PASS){            
+        if(password == process.env.REACT_APP_ADMIN_PASS){         
+            localStorage.setItem("loggedIn", true);   
             alert("Logged in!")
+            navigate("/home");
             // redirect
         }
         else{
             alert("Incorrect password!")
         }
     }
+    useEffect(()=>{
+        loginPageAuthCheck(navigate)        
+    },[])
     return (
         <div>
             <Card

@@ -1,4 +1,3 @@
-import React, {useState, useEffect} from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 // ============================login============================
@@ -8,19 +7,19 @@ import Login from "./Pages/Login";
 // ============================portfolio site management============================
 
 // ======================skills======================
-import SkillPage from "./Pages/Skills/SkillPage";
-import AddSkills from "./Pages/Skills/AddSkills"
-import EditSkill from "./Pages/Skills/EditSkill";
+import SkillPage from "./Pages/PortfolioManagement/Skills/SkillPage";
+import AddSkills from "./Pages/PortfolioManagement/Skills/AddSkills";
+import EditSkill from "./Pages/PortfolioManagement/Skills/EditSkill";
 // ======================projects======================
-import ProjectPage from "./Pages/Projects/ProjectPage"
-import AddProjects from "./Pages/Projects/AddProjects"
-import EditProject from "./Pages/Projects/EditProject";
+import ProjectPage from "./Pages/PortfolioManagement/Projects/ProjectPage"
+import AddProjects from "./Pages/PortfolioManagement/Projects/AddProjects"
+import EditProject from "./Pages/PortfolioManagement/Projects/EditProject";
 // ======================experiences======================
-import ExperiencePage from "./Pages/Experiences/ExperiencePage"
-import AddExperience from "./Pages/Experiences/AddExperience"
-import ViewExperience from "./Pages/Experiences/ViewExperience";
+import ExperiencePage from "./Pages/PortfolioManagement/Experiences/ExperiencePage"
+import AddExperience from "./Pages/PortfolioManagement/Experiences/AddExperience"
+import ViewExperience from "./Pages/PortfolioManagement/Experiences/ViewExperience";
 // ======================etc======================
-import MainMenu from "./Pages/MainMenu";
+import MainMenu from "./Pages/PortfolioManagement/MainMenu";
 import NotFound from "./Pages/NotFound"
 
 function App() {
@@ -31,6 +30,8 @@ function App() {
                 {/* ============================login============================ */}
                 <Route exact path ="/login" element = {<Login/>}/>
 
+                {/* ============================very main menu============================ */}
+                <Route exact path="/home" element={<MainMenu />} />
 
                 {/* ============================portfolio site management============================ */}
                  {/* ======================home====================== */}
@@ -48,7 +49,6 @@ function App() {
                 <Route exact path ="/portfolio/experience/add" element = {<AddExperience/>}/>
                 <Route exact path ="/portfolio/experience/:experienceId" element = {<ViewExperience/>}/>
                 {/* ======================etc====================== */}
-                <Route exact path="/" element={<MainMenu />} />
                 <Route exact path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>

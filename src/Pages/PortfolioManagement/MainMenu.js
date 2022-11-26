@@ -4,25 +4,30 @@ import Button from "@mui/material/Button";
 import { Card } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
+import { useNavigate } from "react-router-dom";
+import { defaultAuthCheck } from "../../Authenticated";
 import axios from "axios";
 function MainMenu(props) {
+    const navigate = useNavigate();
     const [enableImport, setEnableImport] = useState(false);
-    const toggleImport = (importStatus) =>{
+    const toggleImport = (importStatus) => {
         localStorage.setItem("enableImport", importStatus);
-        setEnableImport(importStatus)
-    }
+        setEnableImport(importStatus);
+    };
 
-    useState(()=>{
-        const savedEnableImport = JSON.parse(localStorage.getItem("enableImport"));
-        console.log(savedEnableImport)
-        if(savedEnableImport == null){
+
+    useEffect(() => {
+        defaultAuthCheck(navigate);
+        const savedEnableImport = JSON.parse(
+            localStorage.getItem("enableImport")
+        );
+        console.log(savedEnableImport);
+        if (savedEnableImport == null) {
             localStorage.setItem("enableImport", false);
             setEnableImport(false);
         }
-        setEnableImport(savedEnableImport)
-
-    },[])
+        setEnableImport(savedEnableImport);
+    }, []);
     const viewUploadedFile = (e) => {
         const fileReader = new FileReader();
         fileReader.readAsText(e.target.files[0], "UTF-8");

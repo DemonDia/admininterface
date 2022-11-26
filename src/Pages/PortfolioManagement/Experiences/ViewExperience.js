@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import ExperienceForm from "../../Components/Experiences/ExperienceForm";
+import ExperienceForm from "../../../Components/Experiences/ExperienceForm";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+import {defaultAuthCheck} from "../../../Authenticated"
+
 function ViewExperience() {
+    const navigate = useNavigate();
     const baseURL = process.env.REACT_APP_BACKEND_API;
     const { experienceId } = useParams();
     const [experience, setExperience] = useState(null);
@@ -18,6 +23,7 @@ function ViewExperience() {
     };
 
     useEffect(() => {
+        defaultAuthCheck(navigate);
         getSkill();
     }, []);
     return (

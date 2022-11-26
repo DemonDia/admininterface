@@ -12,7 +12,10 @@ import Paper from "@mui/material/Paper";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { defaultAuthCheck } from "../../../Authenticated";
 function ExperiencePage() {
+    const navigate = useNavigate();
     var baseURL = process.env.REACT_APP_BACKEND_API;
     const [experiences, setExperience] = useState([]);
     const getExperience = async () => {
@@ -64,6 +67,7 @@ function ExperiencePage() {
     };
 
     useEffect(() => {
+        defaultAuthCheck(navigate);
         getExperience();
     }, []);
     return (

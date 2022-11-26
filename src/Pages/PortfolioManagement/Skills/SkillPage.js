@@ -12,93 +12,98 @@ import Paper from "@mui/material/Paper";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { Button } from "@mui/material";
-
-function ProjectPage() {
+import { useNavigate } from "react-router-dom";
+import { defaultAuthCheck } from "../../../Authenticated";
+function SkillPage() {
     var baseURL = process.env.REACT_APP_BACKEND_API;
-    const [projects, setProjects] = useState([]);
-    const getProjects = async () => {
-        await axios.get(baseURL + "/projects").then((res) => {
+    var navigate = useNavigate();
+    const [skills, setSkills] = useState([]);
+    const getSkills = async () => {
+        await axios.get(baseURL + "/skills").then((res) => {
             console.log(res);
             if (res.data.success) {
-                setProjects(res.data.data);
+                setSkills(res.data.data);
             }
         });
     };
 
-    const deleteAllProjects = async () => {
-        var deleteKey = prompt("Are you sure you want to delete?(Type 'yes' to delete all)")
-        if(deleteKey =='yes'){
-            await axios
-            .delete(baseURL + "/projects/")
-            .then(async (res) => {
-                if (res.data.success) {
-                    alert("Reset successfully");
-                    await getProjects();
-                }
-                else{
-                    alert("Failed to reset")
-                }
-            })
-            .catch((err) => {
-                alert("Projects reset unsuccessfully");
-            });
-        }
-    };
-
-    const deleteProject = async (projectId) => {
+    const deleteSkill = async (skillId) => {
         await axios
-            .delete(baseURL + `/projects/${projectId}`)
+            .delete(baseURL + `/skills/${skillId}`)
             .then(async (res) => {
                 console.log(res);
                 if (res.data.success) {
-                    alert("Project deleted!");
-                    await getProjects();
+                    alert("Skill deleted!");
+                    await getSkills();
                 } else {
-                    alert("Failed to delete project!");
+                    alert("Failed to delete skill!");
                 }
             })
             .catch((err) => {
                 console.log(err);
-                alert("Failed to delete project");
+                alert("Failed to delete skill");
             });
     };
 
+    const deleteAllSkills = async () => {
+        console.log("clicked");
+        var deleteKey = prompt(
+            "Are you sure you want to delete?(Type 'yes' to delete all)"
+        );
+        if (deleteKey == "yes") {
+            await axios
+                .delete(baseURL + "/skills/")
+                .then(async (res) => {
+                    if (res.data.success) {
+                        alert("Reset successfully");
+                        await getSkills();
+                    } else {
+                        alert("Failed to reset");
+                    }
+                })
+                .catch((err) => {
+                    alert("Skills reset unsuccessfully");
+                });
+        }
+    };
+
     useEffect(() => {
-        getProjects();
+        defaultAuthCheck(navigate);
+        getSkills();
     }, []);
     return (
         <div style={{ margin: "10px" }}>
-            <h1>Project Page</h1>
+            <h1>Skill Page</h1>
             <Button>
                 <Link to={"/"}>Home</Link>
             </Button>
             <Button>
-                <Link to={"/projects/add"}>Add Project</Link>
+                <Link to={"/skills/add"}>Add Skill</Link>
             </Button>
             <Button>
                 <Link
                     onClick={() => {
-                        deleteAllProjects();
+                        deleteAllSkills();
                     }}
                 >
-                    Empty project records
+                    Empty skill records
                 </Link>
             </Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell align="center">Project Name</TableCell>
-                            <TableCell align="center">Project Year</TableCell>
+                            <TableCell align="center">Skill Name</TableCell>
+                            <TableCell align="center">Skill Year</TableCell>
                             <TableCell align="center" colSpan={2}>
                                 Actions
                             </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {projects.map((project) => (
+                        {skills.map((skill) => (
                             <TableRow
-                                key={project._id}
+                                key={skill._id}
                                 sx={{
                                     "&:last-child td, &:last-child th": {
                                         border: 0,
@@ -106,20 +111,20 @@ function ProjectPage() {
                                 }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {project.name}
+                                    {skill.name}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {project.year}
+                                    {skill.year_learnt}
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Link to={`/projects/${project._id}`}>
+                                    <Link to={`/skills/${skill._id}`}>
                                         <EditOutlinedIcon />
                                     </Link>
                                 </TableCell>
                                 <TableCell
                                     align="center"
                                     onClick={() => {
-                                        deleteProject(project._id);
+                                        deleteSkill(skill._id);
                                     }}
                                 >
                                     <Link>
@@ -128,10 +133,10 @@ function ProjectPage() {
                                 </TableCell>
                             </TableRow>
                         ))}
-                        {projects.length == 0 ? (
+                        {skills.length == 0 ? (
                             <TableRow>
                                 <TableCell align="center" colSpan={4}>
-                                    No projects to show
+                                    No skills to show
                                 </TableCell>
                             </TableRow>
                         ) : (
@@ -144,4 +149,4 @@ function ProjectPage() {
     );
 }
 
-export default ProjectPage;
+export default SkillPage;

@@ -12,94 +12,96 @@ import Paper from "@mui/material/Paper";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { Button } from "@mui/material";
-
-function SkillPage() {
+import { useNavigate } from "react-router-dom";
+import { defaultAuthCheck } from "../../../Authenticated";
+function ProjectPage() {
     var baseURL = process.env.REACT_APP_BACKEND_API;
-    const [skills, setSkills] = useState([]);
-    const getSkills = async () => {
-        await axios.get(baseURL + "/skills").then((res) => {
+    var navigate = useNavigate()
+    const [projects, setProjects] = useState([]);
+    const getProjects = async () => {
+        await axios.get(baseURL + "/projects").then((res) => {
             console.log(res);
             if (res.data.success) {
-                setSkills(res.data.data);
+                setProjects(res.data.data);
             }
         });
     };
 
-    const deleteSkill = async (skillId) => {
-        await axios
-            .delete(baseURL + `/skills/${skillId}`)
-            .then(async (res) => {
-                console.log(res);
-                if (res.data.success) {
-                    alert("Skill deleted!");
-                    await getSkills();
-                } else {
-                    alert("Failed to delete skill!");
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                alert("Failed to delete skill");
-            });
-    };
-
-    const deleteAllSkills = async () => {
-        console.log("clicked");
+    const deleteAllProjects = async () => {
         var deleteKey = prompt("Are you sure you want to delete?(Type 'yes' to delete all)")
         if(deleteKey =='yes'){
             await axios
-            .delete(baseURL + "/skills/")
+            .delete(baseURL + "/projects/")
             .then(async (res) => {
                 if (res.data.success) {
                     alert("Reset successfully");
-                    await getSkills();
+                    await getProjects();
                 }
                 else{
                     alert("Failed to reset")
                 }
             })
             .catch((err) => {
-                alert("Skills reset unsuccessfully");
+                alert("Projects reset unsuccessfully");
             });
         }
     };
 
+    const deleteProject = async (projectId) => {
+        await axios
+            .delete(baseURL + `/projects/${projectId}`)
+            .then(async (res) => {
+                console.log(res);
+                if (res.data.success) {
+                    alert("Project deleted!");
+                    await getProjects();
+                } else {
+                    alert("Failed to delete project!");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Failed to delete project");
+            });
+    };
+
     useEffect(() => {
-        getSkills();
+        defaultAuthCheck(navigate)
+        getProjects();
     }, []);
     return (
         <div style={{ margin: "10px" }}>
-            <h1>Skill Page</h1>
+            <h1>Project Page</h1>
             <Button>
                 <Link to={"/"}>Home</Link>
             </Button>
             <Button>
-                <Link to={"/skills/add"}>Add Skill</Link>
+                <Link to={"/projects/add"}>Add Project</Link>
             </Button>
             <Button>
                 <Link
                     onClick={() => {
-                        deleteAllSkills();
+                        deleteAllProjects();
                     }}
                 >
-                    Empty skill records
+                    Empty project records
                 </Link>
             </Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell align="center">Skill Name</TableCell>
-                            <TableCell align="center">Skill Year</TableCell>
+                            <TableCell align="center">Project Name</TableCell>
+                            <TableCell align="center">Project Year</TableCell>
                             <TableCell align="center" colSpan={2}>
                                 Actions
                             </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {skills.map((skill) => (
+                        {projects.map((project) => (
                             <TableRow
-                                key={skill._id}
+                                key={project._id}
                                 sx={{
                                     "&:last-child td, &:last-child th": {
                                         border: 0,
@@ -107,20 +109,20 @@ function SkillPage() {
                                 }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {skill.name}
+                                    {project.name}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {skill.year_learnt}
+                                    {project.year}
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Link to={`/skills/${skill._id}`}>
+                                    <Link to={`/projects/${project._id}`}>
                                         <EditOutlinedIcon />
                                     </Link>
                                 </TableCell>
                                 <TableCell
                                     align="center"
                                     onClick={() => {
-                                        deleteSkill(skill._id);
+                                        deleteProject(project._id);
                                     }}
                                 >
                                     <Link>
@@ -129,10 +131,10 @@ function SkillPage() {
                                 </TableCell>
                             </TableRow>
                         ))}
-                        {skills.length == 0 ? (
+                        {projects.length == 0 ? (
                             <TableRow>
                                 <TableCell align="center" colSpan={4}>
-                                    No skills to show
+                                    No projects to show
                                 </TableCell>
                             </TableRow>
                         ) : (
@@ -145,4 +147,4 @@ function SkillPage() {
     );
 }
 
-export default SkillPage;
+export default ProjectPage;
