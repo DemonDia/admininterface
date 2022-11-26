@@ -1,19 +1,25 @@
+import React, {useState, useEffect} from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+// ============================login============================
+import Login from "./Pages/Login";
 
-// ============================skills============================
+
+// ============================portfolio site management============================
+
+// ======================skills======================
 import SkillPage from "./Pages/Skills/SkillPage";
 import AddSkills from "./Pages/Skills/AddSkills"
 import EditSkill from "./Pages/Skills/EditSkill";
-// ============================projects============================
+// ======================projects======================
 import ProjectPage from "./Pages/Projects/ProjectPage"
 import AddProjects from "./Pages/Projects/AddProjects"
 import EditProject from "./Pages/Projects/EditProject";
-// ============================experiences============================
+// ======================experiences======================
 import ExperiencePage from "./Pages/Experiences/ExperiencePage"
 import AddExperience from "./Pages/Experiences/AddExperience"
 import ViewExperience from "./Pages/Experiences/ViewExperience";
-// ============================etc============================
+// ======================etc======================
 import MainMenu from "./Pages/MainMenu";
 import NotFound from "./Pages/NotFound"
 
@@ -22,19 +28,26 @@ function App() {
         <BrowserRouter>
             <div className="App"></div>
             <Routes>
-                {/* ============================skills============================ */}
-                <Route exact path ="/skills" element = {<SkillPage/>}/>
-                <Route exact path ="/skills/add" element = {<AddSkills/>}/>
-                <Route exact path ="/skills/:skillId" element = {<EditSkill/>}/>
-                {/* ============================projects============================ */}
-                <Route exact path ="/projects" element = {<ProjectPage/>}/>
-                <Route exact path ="/projects/add" element = {<AddProjects/>}/>
-                <Route exact path ="/projects/:projectId" element = {<EditProject/>}/>
-                {/* ============================experiences============================ */}
-                <Route exact path ="/experience" element = {<ExperiencePage/>}/>
-                <Route exact path ="/experience/add" element = {<AddExperience/>}/>
-                <Route exact path ="/experience/:experienceId" element = {<ViewExperience/>}/>
-                {/* ============================etc============================ */}
+                {/* ============================login============================ */}
+                <Route exact path ="/login" element = {<Login/>}/>
+
+
+                {/* ============================portfolio site management============================ */}
+                 {/* ======================home====================== */}
+                 <Route exact path="/home/portfolio" element={<MainMenu />} />
+                {/* ======================skills====================== */}
+                <Route exact path ="/portfolio/skills" element = {<SkillPage/>}/>
+                <Route exact path ="/portfolio/skills/add" element = {<AddSkills/>}/>
+                <Route exact path ="/portfolio/skills/:skillId" element = {<EditSkill/>}/>
+                {/* ======================projects====================== */}
+                <Route exact path ="/portfolio/projects" element = {<ProjectPage/>}/>
+                <Route exact path ="/portfolio/projects/add" element = {<AddProjects/>}/>
+                <Route exact path ="/portfolio/projects/:projectId" element = {<EditProject/>}/>
+                {/* ======================experiences====================== */}
+                <Route exact path ="/portfolio/experience" element = {<ExperiencePage/>}/>
+                <Route exact path ="/portfolio/experience/add" element = {<AddExperience/>}/>
+                <Route exact path ="/portfolio/experience/:experienceId" element = {<ViewExperience/>}/>
+                {/* ======================etc====================== */}
                 <Route exact path="/" element={<MainMenu />} />
                 <Route exact path="*" element={<NotFound />} />
             </Routes>
