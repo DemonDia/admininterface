@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { Card } from "@mui/material";
@@ -8,6 +8,21 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import axios from "axios";
 function MainMenu(props) {
     const [enableImport, setEnableImport] = useState(false);
+    const toggleImport = (importStatus) =>{
+        localStorage.setItem("enableImport", importStatus);
+        setEnableImport(importStatus)
+    }
+
+    useState(()=>{
+        const savedEnableImport = JSON.parse(localStorage.getItem("enableImport"));
+        console.log(savedEnableImport)
+        if(savedEnableImport == null){
+            localStorage.setItem("enableImport", false);
+            setEnableImport(false);
+        }
+        setEnableImport(savedEnableImport)
+
+    },[])
     const viewUploadedFile = (e) => {
         const fileReader = new FileReader();
         fileReader.readAsText(e.target.files[0], "UTF-8");
@@ -83,7 +98,7 @@ function MainMenu(props) {
                         control={
                             <Switch
                                 checked={enableImport}
-                                onChange={() => setEnableImport(!enableImport)}
+                                onChange={() => toggleImport(!enableImport)}
                                 color="primary"
                             />
                         }
