@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { Card } from "@mui/material";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 import axios from "axios";
 function MainMenu(props) {
+    const [enableImport, setEnableImport] = useState(false);
     const viewUploadedFile = (e) => {
         const fileReader = new FileReader();
         fileReader.readAsText(e.target.files[0], "UTF-8");
@@ -75,8 +78,23 @@ function MainMenu(props) {
                     <Button variant="text">
                         <Link to="/experience">Manage Experiences</Link>
                     </Button>
+                    <FormControlLabel
+                        sx={{ margin: "auto" }}
+                        control={
+                            <Switch
+                                checked={enableImport}
+                                onChange={() => setEnableImport(!enableImport)}
+                                color="primary"
+                            />
+                        }
+                        label="Allow import"
+                    />
 
-                    <Button variant="filled" component="label">
+                    <Button
+                        variant="filled"
+                        component="label"
+                        disabled={!enableImport}
+                    >
                         <input
                             hidden="true"
                             type="file"
