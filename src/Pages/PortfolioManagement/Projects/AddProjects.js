@@ -13,7 +13,7 @@ function AddProjects(props) {
         <div>
             <h1>Add projects</h1>
             <Button>
-                <Link to="/projects">Back</Link>
+                <Link to="/portfolio/projects">Back</Link>
             </Button>
             <ProjectForm project={null}></ProjectForm>
         </div>

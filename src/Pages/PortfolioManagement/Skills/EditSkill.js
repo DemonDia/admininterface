@@ -28,7 +28,7 @@ function EditSkill() {
         <div>
             <h1>Edit Skill</h1>
             <Button>
-                <Link to="/skills">Back</Link>
+                <Link to="/portfolio/skills">Back</Link>
             </Button>
             {skill ? <SkillForm skill={skill} /> : <h3>Loading ...</h3>}
         </div>

@@ -74,10 +74,10 @@ function ExperiencePage() {
         <div style={{ margin: "10px" }}>
             <h1>Experience Page</h1>
             <Button>
-                <Link to={"/"}>Home</Link>
+                <Link to={"/portfolio"}>Back</Link>
             </Button>
             <Button>
-                <Link to={"/experience/add"}>Add Experience</Link>
+                <Link to={"/portfolio/experience/add"}>Add Experience</Link>
             </Button>
 
             <Button>
@@ -125,7 +125,7 @@ function ExperiencePage() {
                                     {experience.title}
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Link to={`/experience/${experience._id}`}>
+                                    <Link to={`/portfolio/experience/${experience._id}`}>
                                         <EditOutlinedIcon />
                                     </Link>
                                 </TableCell>

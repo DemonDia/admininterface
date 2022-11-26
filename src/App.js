@@ -39,7 +39,7 @@ function App() {
 
                 {/* ============================portfolio site management============================ */}
                  {/* ======================home====================== */}
-                 <Route exact path="/home/portfolio" element={<MainMenu />} />
+                 <Route exact path="/portfolio" element={<MainMenu />} />
                 {/* ======================skills====================== */}
                 <Route exact path ="/portfolio/skills" element = {<SkillPage/>}/>
                 <Route exact path ="/portfolio/skills/add" element = {<AddSkills/>}/>

@@ -90,13 +90,13 @@ function MainMenu(props) {
                 <h1>Main Menu</h1>
                 <div style={{ display: "grid" }}>
                     <Button variant="text">
-                        <Link to="/skills">Manage Skills</Link>
+                        <Link to="/portfolio/skills">Manage Skills</Link>
                     </Button>
                     <Button variant="text">
-                        <Link to="/projects">Manage Projects</Link>
+                        <Link to="/portfolio/projects">Manage Projects</Link>
                     </Button>
                     <Button variant="text">
-                        <Link to="/experience">Manage Experiences</Link>
+                        <Link to="/portfolio/experience">Manage Experiences</Link>
                     </Button>
                     <FormControlLabel
                         sx={{ margin: "auto" }}

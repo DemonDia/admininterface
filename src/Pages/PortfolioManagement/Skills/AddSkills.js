@@ -13,7 +13,7 @@ function AddSkills() {
         <div>
             <h1>Add skills</h1>
             <Button>
-                <Link to = "/skills">Back</Link>
+                <Link to = "/portfolio/skills">Back</Link>
             </Button>
             <SkillForm skill = {null}></SkillForm>
         </div>

@@ -108,7 +108,7 @@ function ExperienceForm(props) {
                 console.log(res);
                 if (res.data.success) {
                     alert("Adding successful");
-                    navigate("/experience");
+                    navigate("/portfolio/experience");
                 } else {
                     alert("Adding unsuccessful");
                 }
@@ -135,7 +135,7 @@ function ExperienceForm(props) {
                 console.log(res);
                 if (res.data.success) {
                     alert("Updating successful");
-                    navigate("/experience");
+                    navigate("/portfolio/experience");
                 } else {
                     alert("Updating unsuccessful");
                 }

@@ -30,7 +30,7 @@ function ViewExperience() {
         <div>
             <h1>Edit Experience</h1>
             <Button>
-                <Link to="/experience">Back</Link>
+                <Link to="/portfolio/experience">Back</Link>
             </Button>
             {experience?<ExperienceForm experience={experience} />:<h3>Loading ...</h3>}
         </div>

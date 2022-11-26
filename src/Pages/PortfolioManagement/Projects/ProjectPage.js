@@ -73,10 +73,10 @@ function ProjectPage() {
         <div style={{ margin: "10px" }}>
             <h1>Project Page</h1>
             <Button>
-                <Link to={"/"}>Home</Link>
+                <Link to={"/portfolio"}>Back</Link>
             </Button>
             <Button>
-                <Link to={"/projects/add"}>Add Project</Link>
+                <Link to={"/portfolio/projects/add"}>Add Project</Link>
             </Button>
             <Button>
                 <Link
@@ -115,7 +115,7 @@ function ProjectPage() {
                                     {project.year}
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Link to={`/projects/${project._id}`}>
+                                    <Link to={`/portfolio/projects/${project._id}`}>
                                         <EditOutlinedIcon />
                                     </Link>
                                 </TableCell>

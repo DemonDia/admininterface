@@ -113,7 +113,7 @@ function ProjectForm(props) {
                 console.log(res);
                 if (res.data.success) {
                     alert("Adding successful");
-                    navigate("/projects");
+                    navigate("/portfolio/projects");
                 } else {
                     alert("Adding unsuccessful");
                 }
@@ -140,7 +140,7 @@ function ProjectForm(props) {
                 console.log(res);
                 if (res.data.success) {
                     alert("Updating successful");
-                    navigate("/projects");
+                    navigate("/portfolio/projects");
                 } else {
                     alert("Updating unsuccessful");
                 }

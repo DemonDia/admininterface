@@ -13,7 +13,7 @@ function AddExperience(props) {
         <div>
             <h1>Add Experience</h1>
             <Button>
-                <Link to = "/experience">Back</Link>
+                <Link to = "/portfolio/experience">Back</Link>
             </Button>
             <ExperienceForm experience = {null}></ExperienceForm>
         </div>

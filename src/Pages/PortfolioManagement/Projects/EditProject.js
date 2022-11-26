@@ -27,7 +27,7 @@ function EditProject() {
         <div>
             <h1>Edit Project</h1>
             <Button>
-                <Link to="/projects">Back</Link>
+                <Link to="/portfolio/projects">Back</Link>
             </Button>
             {project ? <ProjectForm project={project} /> : <h3>Loading ...</h3>}
         </div>

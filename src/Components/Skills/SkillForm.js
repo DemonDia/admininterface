@@ -33,7 +33,7 @@ function SkillForm(props) {
                 console.log(res);
                 if (res.data.success) {
                     alert("Adding successful");
-                    navigate("/skills");
+                    navigate("/portfolio/skills");
                 } else {
                     alert("Adding unsuccessful");
                 }
@@ -55,7 +55,7 @@ function SkillForm(props) {
                 console.log(res);
                 if (res.data.success) {
                     alert("Updating successful");
-                    navigate("/skills");
+                    navigate("/portfolio/skills");
                 } else {
                     alert("Updating unsuccessful");
                 }

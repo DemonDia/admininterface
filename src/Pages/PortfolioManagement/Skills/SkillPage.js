@@ -75,10 +75,10 @@ function SkillPage() {
         <div style={{ margin: "10px" }}>
             <h1>Skill Page</h1>
             <Button>
-                <Link to={"/"}>Home</Link>
+                <Link to={"/portfolio"}>Back</Link>
             </Button>
             <Button>
-                <Link to={"/skills/add"}>Add Skill</Link>
+                <Link to={"/portfolio/skills/add"}>Add Skill</Link>
             </Button>
             <Button>
                 <Link
@@ -117,7 +117,7 @@ function SkillPage() {
                                     {skill.year_learnt}
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Link to={`/skills/${skill._id}`}>
+                                    <Link to={`/portfolio/skills/${skill._id}`}>
                                         <EditOutlinedIcon />
                                     </Link>
                                 </TableCell>
