@@ -5,6 +5,8 @@ import Login from "./Pages/Login";
 
 
 // ============================portfolio site management============================
+// ======================Main menu======================
+import MainMenu from "./Pages/PortfolioManagement/MainMenu";
 
 // ======================skills======================
 import SkillPage from "./Pages/PortfolioManagement/Skills/SkillPage";
@@ -18,9 +20,11 @@ import EditProject from "./Pages/PortfolioManagement/Projects/EditProject";
 import ExperiencePage from "./Pages/PortfolioManagement/Experiences/ExperiencePage"
 import AddExperience from "./Pages/PortfolioManagement/Experiences/AddExperience"
 import ViewExperience from "./Pages/PortfolioManagement/Experiences/ViewExperience";
-// ======================etc======================
-import MainMenu from "./Pages/PortfolioManagement/MainMenu";
-import NotFound from "./Pages/NotFound"
+
+
+// ============================redirect============================
+import NotFound from "./Pages/RedirectPages/NotFound"
+import Redirection from "./Pages/RedirectPages/Redirection";
 
 function App() {
     return (
@@ -49,6 +53,7 @@ function App() {
                 <Route exact path ="/portfolio/experience/add" element = {<AddExperience/>}/>
                 <Route exact path ="/portfolio/experience/:experienceId" element = {<ViewExperience/>}/>
                 {/* ======================etc====================== */}
+                <Route exact path="/" element={<Redirection />} />
                 <Route exact path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
