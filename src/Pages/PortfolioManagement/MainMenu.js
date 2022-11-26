@@ -87,7 +87,7 @@ function MainMenu(props) {
                     alignItems: "middle",
                 }}
             >
-                <h1>Main Menu</h1>
+                <h1>Portfolio Menu</h1>
                 <div style={{ display: "grid" }}>
                     <Button variant="text">
                         <Link to="/portfolio/skills">Manage Skills</Link>
@@ -123,7 +123,9 @@ function MainMenu(props) {
                         />
                         Import
                     </Button>
-                    {/* <Button variant="text">Manage Contacts</Button> */}
+                    <Button variant="text">
+                        <Link to="/home">Back</Link>
+                    </Button>
                 </div>
             </Card>
         </div>

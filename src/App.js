@@ -3,6 +3,9 @@ import "./App.css";
 // ============================login============================
 import Login from "./Pages/Login";
 
+// ============================home menu============================
+import HomeMenu from "./Pages/HomeMenu";
+
 
 // ============================portfolio site management============================
 // ======================Main menu======================
@@ -35,7 +38,7 @@ function App() {
                 <Route exact path ="/login" element = {<Login/>}/>
 
                 {/* ============================very main menu============================ */}
-                <Route exact path="/home" element={<MainMenu />} />
+                <Route exact path="/home" element={<HomeMenu />} />
 
                 {/* ============================portfolio site management============================ */}
                  {/* ======================home====================== */}
