@@ -16,7 +16,7 @@ import Paper from "@mui/material/Paper";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 import TechStackRow from "./TechStackRow";
-
+import ProjectLinkRow from "./ProjectLinkRow";
 function ProjectForm(props) {
     const baseURL = process.env.REACT_APP_BACKEND_API;
     const navigate = useNavigate();
@@ -65,6 +65,14 @@ function ProjectForm(props) {
             setProjectLinkName("");
         }
     };
+    // ===========update project ===========
+    const updateProjectLink = (projectLinkName,projectLinkURL,index) =>{
+        if(projectLinkName!= "" && projectLinkURL!=""){
+            projectLinks[index].name = projectLinkName;
+            projectLinks[index].url = projectLinkURL;
+        }
+
+    }
 
     // ===========delete link ===========
     const deleteProjectLink = (currProjectLink) => {
@@ -276,18 +284,6 @@ function ProjectForm(props) {
                                         saveChanges={updateTechStack}
                                         deleteTechStack = {deleteTechStack}
                                     />
-                                    // <TableRow>
-                                    //     <TableCell>{tech_stack}</TableCell>
-                                    //     <TableCell align={"center"}>
-                                    //         <Link
-                                    //             onClick={() => {
-                                    //                 deleteTechStack(tech_stack);
-                                    //             }}
-                                    //         >
-                                    //             <DeleteForeverOutlinedIcon />
-                                    //         </Link>
-                                    //     </TableCell>
-                                    // </TableRow>
                                 );
                             })}
                         </TableBody>
@@ -348,32 +344,36 @@ function ProjectForm(props) {
                                     </Button>
                                 </TableCell>
                             </TableRow>
-                            {projectLinks.map((projectLink) => {
+                            {projectLinks.map((projectLink,index) => {
                                 return (
-                                    <TableRow>
-                                        <TableCell>
-                                            {projectLink.name}
-                                        </TableCell>
-                                        <TableCell>
-                                            <a
-                                                target="_blank"
-                                                href={projectLink.url}
-                                            >
-                                                {projectLink.url}
-                                            </a>
-                                        </TableCell>
-                                        <TableCell align={"center"}>
-                                            <Link
-                                                onClick={() => {
-                                                    deleteProjectLink(
-                                                        projectLink
-                                                    );
-                                                }}
-                                            >
-                                                <DeleteForeverOutlinedIcon />
-                                            </Link>
-                                        </TableCell>
-                                    </TableRow>
+                                    <ProjectLinkRow projectLink = {projectLink}
+                                    index = {index}
+                                    saveChanges = {updateProjectLink}
+                                    deleteProjectLink = {deleteProjectLink}/>
+                                    // <TableRow>
+                                    //     <TableCell>
+                                    //         {projectLink.name}
+                                    //     </TableCell>
+                                    //     <TableCell>
+                                    //         <a
+                                    //             target="_blank"
+                                    //             href={projectLink.url}
+                                    //         >
+                                    //             {projectLink.url}
+                                    //         </a>
+                                    //     </TableCell>
+                                    //     <TableCell align={"center"}>
+                                    //         <Link
+                                    //             onClick={() => {
+                                    //                 deleteProjectLink(
+                                    //                     projectLink
+                                    //                 );
+                                    //             }}
+                                    //         >
+                                    //             <DeleteForeverOutlinedIcon />
+                                    //         </Link>
+                                    //     </TableCell>
+                                    // </TableRow>
                                 );
                             })}
                         </TableBody>
