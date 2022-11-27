@@ -20,7 +20,6 @@ function ExperiencePage() {
     const [experiences, setExperience] = useState([]);
     const getExperience = async () => {
         await axios.get(baseURL + "/experiences").then((res) => {
-            console.log(res);
             if (res.data.success) {
                 setExperience(res.data.data);
             }
@@ -31,7 +30,6 @@ function ExperiencePage() {
         await axios
             .delete(baseURL + `/experiences/${experienceId}`)
             .then(async (res) => {
-                console.log(res);
                 if (res.data.success) {
                     alert("Experience deleted!");
                     await getExperience();
@@ -40,7 +38,6 @@ function ExperiencePage() {
                 }
             })
             .catch((err) => {
-                console.log(err);
                 alert("Failed to delete experience");
             });
     };

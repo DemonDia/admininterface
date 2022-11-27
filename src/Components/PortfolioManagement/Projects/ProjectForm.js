@@ -50,7 +50,6 @@ function ProjectForm(props) {
         const findDuplicates = projectLinks.filter((projectLink) => {
             return projectLink.name == titleCaseProjectLinkName;
         });
-        console.log(findDuplicates);
         if (findDuplicates.length > 0) {
             alert("Duplicate found");
         } else if (titleCaseProjectLinkName == "") {
@@ -98,7 +97,6 @@ function ProjectForm(props) {
             setProjectTechStacks(projectTechStacks);
             setTechStackName("");
         }
-        console.log(projectTechStacks);
     };
     // ============update tech stack============
     const updateTechStack = (newVal, index) => {
@@ -127,7 +125,6 @@ function ProjectForm(props) {
                 links: projectLinks,
             })
             .then((res) => {
-                console.log(res);
                 if (res.data.success) {
                     alert("Adding successful");
                     navigate("/portfolio/projects");
@@ -136,7 +133,6 @@ function ProjectForm(props) {
                 }
             })
             .catch((err) => {
-                console.log(err);
                 alert("Adding unsuccessful");
             });
     };
@@ -154,7 +150,6 @@ function ProjectForm(props) {
                 links: projectLinks,
             })
             .then((res) => {
-                console.log(res);
                 if (res.data.success) {
                     alert("Updating successful");
                     navigate("/portfolio/projects");
@@ -163,7 +158,6 @@ function ProjectForm(props) {
                 }
             })
             .catch((err) => {
-                console.log(err);
                 alert("Updating unsuccessful");
             });
     };

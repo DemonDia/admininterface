@@ -13,7 +13,6 @@ function EditProject() {
 
     const getProject = async () => {
         await axios.get(baseURL + `/projects/${projectId}`).then((res) => {
-            console.log(res);
             if (res.data.success) {
                 setProject(res.data.data);
             }

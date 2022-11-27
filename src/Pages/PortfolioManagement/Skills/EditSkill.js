@@ -13,7 +13,6 @@ function EditSkill() {
 
     const getSkill = async () => {
         await axios.get(baseURL + `/skills/${skillId}`).then((res) => {
-            console.log(res);
             if (res.data.success) {
                 setSkill(res.data.data);
             }

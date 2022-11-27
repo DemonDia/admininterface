@@ -15,7 +15,6 @@ function ViewExperience() {
 
     const getSkill = async () => {
         await axios.get(baseURL + `/experiences/${experienceId}`).then((res) => {
-            console.log(res);
             if (res.data.success) {
                 setExperience(res.data.data);
             }

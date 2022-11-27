@@ -55,10 +55,8 @@ function ExperienceForm(props) {
         // ==========if its to update==========
         if (props.experience) {
             setCompanyName(props.experience.company_name);
-            console.log(props.experience.starting);
             const [startingMonth, startingYear] =
                 props.experience.starting.split(" ");
-            console.log();
             setStartYear(startingYear);
             setStartMonth(getMonthFromString(startingMonth));
 
@@ -107,7 +105,6 @@ function ExperienceForm(props) {
                 status: status,
             })
             .then((res) => {
-                console.log(res);
                 if (res.data.success) {
                     alert("Adding successful");
                     navigate("/portfolio/experience");
@@ -116,7 +113,6 @@ function ExperienceForm(props) {
                 }
             })
             .catch((err) => {
-                console.log(err);
                 alert("Adding unsuccessful");
             });
     };
@@ -134,7 +130,6 @@ function ExperienceForm(props) {
                 status: status,
             })
             .then((res) => {
-                console.log(res);
                 if (res.data.success) {
                     alert("Updating successful");
                     navigate("/portfolio/experience");
@@ -143,7 +138,6 @@ function ExperienceForm(props) {
                 }
             })
             .catch((err) => {
-                console.log(err);
                 alert("Updating unsuccessful");
             });
     };

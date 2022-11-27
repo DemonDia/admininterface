@@ -20,7 +20,6 @@ function ProjectPage() {
     const [projects, setProjects] = useState([]);
     const getProjects = async () => {
         await axios.get(baseURL + "/projects").then((res) => {
-            console.log(res);
             if (res.data.success) {
                 setProjects(res.data.data);
             }
@@ -51,7 +50,6 @@ function ProjectPage() {
         await axios
             .delete(baseURL + `/projects/${projectId}`)
             .then(async (res) => {
-                console.log(res);
                 if (res.data.success) {
                     alert("Project deleted!");
                     await getProjects();
@@ -60,7 +58,6 @@ function ProjectPage() {
                 }
             })
             .catch((err) => {
-                console.log(err);
                 alert("Failed to delete project");
             });
     };

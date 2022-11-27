@@ -21,7 +21,6 @@ function MainMenu(props) {
         const savedEnableImport = JSON.parse(
             localStorage.getItem("enableImport")
         );
-        console.log(savedEnableImport);
         if (savedEnableImport == null) {
             localStorage.setItem("enableImport", false);
             setEnableImport(false);
@@ -36,10 +35,6 @@ function MainMenu(props) {
             const experiences = jsonChunk.experience;
             const projects = jsonChunk.project;
             const skillsChunk = jsonChunk.skill;
-
-            console.log(experiences);
-            console.log(projects);
-            console.log(skillsChunk);
 
             var skills = [];
 
@@ -62,15 +57,12 @@ function MainMenu(props) {
                 })
                 .then((res) => {
                     if (res.data.success) {
-                        console.log(res);
-                        console.log("Skills imported successfully");
                         alert("Imported");
                     } else {
                         alert("Import failed");
                     }
                 })
                 .catch((err) => {
-                    console.log(err);
                     alert("Import failed");
                 });
             // upload the experiences, project into json

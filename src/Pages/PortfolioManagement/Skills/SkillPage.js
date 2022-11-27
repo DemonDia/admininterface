@@ -20,7 +20,6 @@ function SkillPage() {
     const [skills, setSkills] = useState([]);
     const getSkills = async () => {
         await axios.get(baseURL + "/skills").then((res) => {
-            console.log(res);
             if (res.data.success) {
                 setSkills(res.data.data);
             }
@@ -31,7 +30,6 @@ function SkillPage() {
         await axios
             .delete(baseURL + `/skills/${skillId}`)
             .then(async (res) => {
-                console.log(res);
                 if (res.data.success) {
                     alert("Skill deleted!");
                     await getSkills();
@@ -40,13 +38,11 @@ function SkillPage() {
                 }
             })
             .catch((err) => {
-                console.log(err);
                 alert("Failed to delete skill");
             });
     };
 
     const deleteAllSkills = async () => {
-        console.log("clicked");
         var deleteKey = prompt(
             "Are you sure you want to delete?(Type 'yes' to delete all)"
         );
