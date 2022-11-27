@@ -15,6 +15,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
+import TechStackRow from "./TechStackRow";
+
 function ProjectForm(props) {
     const baseURL = process.env.REACT_APP_BACKEND_API;
     const navigate = useNavigate();
@@ -90,6 +92,13 @@ function ProjectForm(props) {
         }
         console.log(projectTechStacks);
     };
+    // ============update tech stack============
+    const updateTechStack = (newVal, index) => {
+        if (newVal != "") {
+            projectTechStacks[index] = newVal;
+        }
+    };
+
     // ============delete tech stack============
     const deleteTechStack = (currentTechStack) => {
         const techStacks = projectTechStacks.filter((tech_stack) => {
@@ -259,20 +268,26 @@ function ProjectForm(props) {
                                     </Button>
                                 </TableCell>
                             </TableRow>
-                            {projectTechStacks.map((tech_stack) => {
+                            {projectTechStacks.map((tech_stack, index) => {
                                 return (
-                                    <TableRow>
-                                        <TableCell>{tech_stack}</TableCell>
-                                        <TableCell align={"center"}>
-                                            <Link
-                                                onClick={() => {
-                                                    deleteTechStack(tech_stack);
-                                                }}
-                                            >
-                                                <DeleteForeverOutlinedIcon />
-                                            </Link>
-                                        </TableCell>
-                                    </TableRow>
+                                    <TechStackRow
+                                        tech_stack={tech_stack}
+                                        index={index}
+                                        saveChanges={updateTechStack}
+                                        deleteTechStack = {deleteTechStack}
+                                    />
+                                    // <TableRow>
+                                    //     <TableCell>{tech_stack}</TableCell>
+                                    //     <TableCell align={"center"}>
+                                    //         <Link
+                                    //             onClick={() => {
+                                    //                 deleteTechStack(tech_stack);
+                                    //             }}
+                                    //         >
+                                    //             <DeleteForeverOutlinedIcon />
+                                    //         </Link>
+                                    //     </TableCell>
+                                    // </TableRow>
                                 );
                             })}
                         </TableBody>
@@ -342,9 +357,7 @@ function ProjectForm(props) {
                                         <TableCell>
                                             <a
                                                 target="_blank"
-                                                href={
-                                                    projectLink.url
-                                                }
+                                                href={projectLink.url}
                                             >
                                                 {projectLink.url}
                                             </a>
