@@ -16,6 +16,8 @@ import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
+import DetailRow from "./DetailRow";
+
 function ExperienceForm(props) {
     const baseURL = process.env.REACT_APP_BACKEND_API;
     const navigate = useNavigate();
@@ -158,6 +160,11 @@ function ExperienceForm(props) {
             setDetailPoint("");
         }
     };
+
+    // ============update detail============
+    const updateDetailPoint = (currentDetail, index) => {
+        details[index] = currentDetail;
+    };
     // ============delete detail============
     const deleteDetailPoint = (currentDetail) => {
         const filteredDetails = details.filter((detail) => {
@@ -236,20 +243,14 @@ function ExperienceForm(props) {
                                     </Button>
                                 </TableCell>
                             </TableRow>
-                            {details.map((detail) => {
+                            {details.map((detail,index) => {
                                 return (
-                                    <TableRow>
-                                        <TableCell>{detail}</TableCell>
-                                        <TableCell align={"center"}>
-                                            <Link
-                                                onClick={() => {
-                                                    deleteDetailPoint(detail);
-                                                }}
-                                            >
-                                                <DeleteForeverOutlinedIcon />
-                                            </Link>
-                                        </TableCell>
-                                    </TableRow>
+                                    <DetailRow
+                                        detail={detail}
+                                        index={index}
+                                        saveChanges={updateDetailPoint}
+                                        deleteDetailPoint={deleteDetailPoint}
+                                    />
                                 );
                             })}
                         </TableBody>
