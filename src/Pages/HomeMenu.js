@@ -31,6 +31,9 @@ function HomeMenu(props) {
                     <Button variant="text">
                         <Link to="/portfolio">Portfolio Management</Link>
                     </Button>
+                    <Button variant="text">
+                        <Link to="/messages">Message Management</Link>
+                    </Button>
                     <Button
                         variant="text"
                         onClick={() => {
