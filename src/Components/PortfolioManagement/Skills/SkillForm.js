@@ -38,7 +38,6 @@ function SkillForm(props) {
                 }
             })
             .catch((err) => {
-                (err);
                 alert("Adding unsuccessful");
             });
     };
@@ -51,7 +50,6 @@ function SkillForm(props) {
                 year_learnt: skillYear,
             })
             .then((res) => {
-                (res);
                 if (res.data.success) {
                     alert("Updating successful");
                     navigate("/portfolio/skills");
@@ -60,7 +58,6 @@ function SkillForm(props) {
                 }
             })
             .catch((err) => {
-                (err);
                 alert("Updating unsuccessful");
             });
     };
