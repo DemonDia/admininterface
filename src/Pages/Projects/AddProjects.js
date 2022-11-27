@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-import ProjectForm from "../../../Components/PortfolioManagement/Projects/ProjectForm";
+import ProjectForm from "../../Components/PortfolioManagement/Projects/ProjectForm";
 import { useNavigate } from "react-router-dom";
-import { defaultAuthCheck } from "../../../Authenticated";
+import { defaultAuthCheck } from "../../Authenticated";
 function AddProjects(props) {
     const navigate = useNavigate();
     useEffect(() => {
@@ -13,7 +13,7 @@ function AddProjects(props) {
         <div>
             <h1>Add projects</h1>
             <Button>
-                <Link to="/portfolio/projects">Back</Link>
+                <Link to="/projects">Back</Link>
             </Button>
             <ProjectForm project={null}></ProjectForm>
         </div>

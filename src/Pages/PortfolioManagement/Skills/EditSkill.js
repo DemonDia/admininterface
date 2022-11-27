@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import SkillForm from "../../../Components/Skills/SkillForm";
+import SkillForm from '../../../Components/PortfolioManagement/Skills/SkillForm';
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { defaultAuthCheck } from "../../../Authenticated";

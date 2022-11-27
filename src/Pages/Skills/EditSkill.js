@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import ExperienceForm from "../../../Components/PortfolioManagement/Experiences/ExperienceForm";
+import SkillForm from "../../Components/PortfolioManagement/Skills/SkillForm";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
-import {defaultAuthCheck} from "../../../Authenticated"
-
-function ViewExperience() {
+import { defaultAuthCheck } from "../../Authenticated";
+function EditSkill() {
     const navigate = useNavigate();
     const baseURL = process.env.REACT_APP_BACKEND_API;
-    const { experienceId } = useParams();
-    const [experience, setExperience] = useState(null);
+    const { skillId } = useParams();
+    const [skill, setSkill] = useState(null);
 
     const getSkill = async () => {
-        await axios.get(baseURL + `/experiences/${experienceId}`).then((res) => {
+        await axios.get(baseURL + `/skills/${skillId}`).then((res) => {
             console.log(res);
             if (res.data.success) {
-                setExperience(res.data.data);
+                setSkill(res.data.data);
             }
         });
     };
@@ -28,13 +26,13 @@ function ViewExperience() {
     }, []);
     return (
         <div>
-            <h1>Edit Experience</h1>
+            <h1>Edit Skill</h1>
             <Button>
-                <Link to="/portfolio/experience">Back</Link>
+                <Link to="/skills">Back</Link>
             </Button>
-            {experience?<ExperienceForm experience={experience} />:<h3>Loading ...</h3>}
+            {skill ? <SkillForm skill={skill} /> : <h3>Loading ...</h3>}
         </div>
     );
 }
 
-export default ViewExperience;
+export default EditSkill;

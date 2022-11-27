@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
-import ExperienceForm from "../../../Components/Experiences/ExperienceForm"
+import ExperienceForm from "../../../Components/PortfolioManagement/Experiences/ExperienceForm";
 import { useNavigate } from "react-router-dom";
 import {defaultAuthCheck} from "../../../Authenticated"
 function AddExperience(props) {
