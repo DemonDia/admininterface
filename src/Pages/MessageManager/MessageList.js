@@ -14,11 +14,16 @@ import Paper from "@mui/material/Paper";
 import axios from "axios";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
+import { TextField, MenuItem, Box, Modal, Typography } from "@mui/material";
+
 import MessageRow from "../../Components/MessageManagement/MessageRow";
 function MessageList(props) {
+    const statusList = ["Pending", "Accepted", "Rejected"];
     const baseURL = process.env.REACT_APP_MESSAGING_API;
     const navigate = useNavigate();
     const [messages, setMessages] = useState([]);
+    const [currentMessage, setCurrentMessage] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
     const getMessages = async () => {
         await axios.get(baseURL + "/messages").then((res) => {
             if (res.data.success) {
@@ -31,6 +36,11 @@ function MessageList(props) {
         defaultAuthCheck(navigate);
         getMessages();
     }, []);
+
+    const openMessageModal = (message) => {
+        setModalOpen(true);
+        setCurrentMessage(message);
+    };
 
     const updateMessageStatus = async (id, status) => {
         await axios
@@ -79,6 +89,7 @@ function MessageList(props) {
                             return (
                                 <MessageRow
                                     message={message}
+                                    openModal={openMessageModal}
                                     deleteFunction={deleteMessage}
                                     updateFunction={updateMessageStatus}
                                 />
@@ -87,6 +98,38 @@ function MessageList(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
+            {currentMessage ? (
+                <Modal
+                    open={modalOpen}
+                    onClose={() => setModalOpen(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box
+                        component={Paper}
+                        sx={{ padding: "10px", margin: "10px auto" }}
+                    >
+                        <h2> Message</h2>
+                        <hr></hr>
+                        <label>Message Title: </label>
+                        {currentMessage.message_title}
+                        <br></br>
+                        <label>Message: </label>
+                        {currentMessage.message_content}
+                        <br></br>
+                        <label>Sender Name: </label>
+                        {currentMessage.sender_name}
+                        <br></br>
+                        <label>Sender Email: </label>
+                        {currentMessage.sender_contact}
+                        <br></br>
+                        <label>Status: </label>
+                        {statusList[currentMessage.message_status]}
+                    </Box>
+                </Modal>
+            ) : (
+                <></>
+            )}
         </div>
     );
 }
